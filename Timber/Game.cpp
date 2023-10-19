@@ -13,9 +13,19 @@ void Game::initWindow()
 	this->window = new sf::RenderWindow(this->videoMode, "TimberTime");
 }
 
+void Game::initTree()
+{
+	this->tree.setSize(sf::Vector2f(200.f, 100.f));
+	this->tree.setFillColor(sf::Color(55, 29, 16));
+	this->tree.setOutlineColor(sf::Color(95, 69, 56));
+	this->tree.setOutlineThickness(1.f);
+
+}
+
 Game::Game() {
 	this->initVar();
 	this->initWindow();
+	this->initTree();
 }
 
 Game::~Game() {
@@ -102,6 +112,8 @@ void Game::update()
 void Game::render()
 {
 	this->window->clear(sf::Color(85,172,238));
+
+	this->window->draw(this->tree);
 
 	this->window->display();
 }

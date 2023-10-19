@@ -19,8 +19,11 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event event;
 
+	sf::RectangleShape tree;
+
 	void initVar();
 	void initWindow();
+	void initTree();
 public:
 	//Konstruktor i destruktor
 	Game();
