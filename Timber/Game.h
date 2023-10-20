@@ -5,6 +5,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp> 
 
+using namespace std;
+
+#include <vector>
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -19,6 +22,11 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event event;
 
+	int points;
+	float loseTimer;
+	float loseTimerMax;
+
+	vector<int> branches;
 	sf::RectangleShape tree;
 
 	void initVar();
@@ -31,11 +39,14 @@ public:
 
 	const bool running() const;
 
+	void spawnTree();
 	void displayBranches();
 	void createBranches();
 	void updateBranches();
 	void pollEvents();
 	void update();
+	void updateTree();
 	void render();
+	void renderTree();
 };
 

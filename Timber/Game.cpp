@@ -3,6 +3,11 @@
 void Game::initVar()
 {
 	this->window = nullptr;
+
+	this->points = 0;
+	this->loseTimerMax = 1000.f;
+	this->loseTimer = this->loseTimerMax;
+
 }
 
 void Game::initWindow()
@@ -11,10 +16,12 @@ void Game::initWindow()
 	this->videoMode.width = 800;
 	this->videoMode.getDesktopMode;
 	this->window = new sf::RenderWindow(this->videoMode, "TimberTime");
+	this->window->setFramerateLimit(60);
 }
 
 void Game::initTree()
 {
+	this->tree.setPosition(300, 400);
 	this->tree.setSize(sf::Vector2f(200.f, 100.f));
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 	this->tree.setOutlineColor(sf::Color(95, 69, 56));
@@ -35,6 +42,10 @@ Game::~Game() {
 const bool Game::running() const
 {
 	return this->window->isOpen();
+}
+
+void Game::spawnTree()
+{
 }
 
 void Game::displayBranches()
@@ -107,13 +118,29 @@ void Game::pollEvents()
 void Game::update()
 {
 	this->pollEvents();
+
+	this->updateTree();
+}
+
+void Game::updateTree()
+{
+	if (this->loseTimer == 0) {
+		this->window->close();
+	}
+	else {
+		this->loseTimer -= 1.f;
+	}
 }
 
 void Game::render()
 {
 	this->window->clear(sf::Color(85,172,238));
 
-	this->window->draw(this->tree);
+	this->renderTree();
 
 	this->window->display();
+}
+
+void Game::renderTree()
+{
 }
