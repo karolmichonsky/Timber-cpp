@@ -25,8 +25,9 @@ private:
 	int points;
 	float loseTimer;
 	float loseTimerMax;
+	int treeCounter;
 
-	vector<int> branches;
+	vector<sf::RectangleShape> trees;
 	sf::RectangleShape tree;
 
 	void initVar();

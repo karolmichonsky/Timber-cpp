@@ -2,6 +2,8 @@
 
 int main(void) {
 	
+	srand(static_cast<unsigned>(time(NULL)));	
+
 	Game game;
 	
 	while (game.running()) {

@@ -46,6 +46,10 @@ const bool Game::running() const
 
 void Game::spawnTree()
 {
+	this->tree.setPosition(300, 200.f+100.f*treeCounter);
+	this->tree.setFillColor(sf::Color(55, 29, 16));
+	this->trees.push_back(this->tree);
+	this->treeCounter += 1;
 }
 
 void Game::displayBranches()
@@ -124,11 +128,19 @@ void Game::update()
 
 void Game::updateTree()
 {
+	if (treeCounter < 5) {
+		//move trees down by 100pixels
+		spawnTree();
+	}
 	if (this->loseTimer == 0) {
 		this->window->close();
 	}
 	else {
 		this->loseTimer -= 1.f;
+	}
+
+	for (auto& e : this->trees) {
+		//todo 
 	}
 }
 
