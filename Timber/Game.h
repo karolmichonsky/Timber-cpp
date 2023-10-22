@@ -28,23 +28,34 @@ private:
 	int treeCounter;
 
 	vector<sf::RectangleShape> trees;
+	vector<int> helpBranches;
+	vector<sf::RectangleShape> branches;
+	sf::RectangleShape branchLeft;
+	sf::RectangleShape branchRight;
+	sf::RectangleShape branchHollow;
 	sf::RectangleShape tree;
 
 	void initVar();
 	void initWindow();
 	void initTree();
+	void initBranchesLeft();
+	void initBranchesRight();
+	void initBranchesHollow();
 public:
 	//Konstruktor i destruktor
 	Game();
 	virtual ~Game();
 
 	const bool running() const;
-
+	
+	
+	void spawnBranches();
 	void spawnTree();
 	void pollEvents();
 	void update();
 	void updateTree();
 	void render();
 	void renderTree();
+	void renderBranches();
 };
 

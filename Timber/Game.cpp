@@ -26,13 +26,32 @@ void Game::initTree()
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 	this->tree.setOutlineColor(sf::Color(95, 69, 56));
 	this->tree.setOutlineThickness(1.f);
+}
 
+void Game::initBranchesLeft()
+{
+	this->branchLeft.setPosition(100, 50);
+	this->branchLeft.setSize(sf::Vector2f(200.f, 10.f));
+	this->branchLeft.setFillColor(sf::Color(55, 29, 16));
+	this->branchLeft.setOutlineColor(sf::Color(95, 69, 56));
+	this->branchLeft.setOutlineThickness(1.f);
+}
+
+void Game::initBranchesRight()
+{
+	this->branchRight.setPosition(500, 50);
+	this->branchRight.setSize(sf::Vector2f(200.f, 10.f));
+	this->branchRight.setFillColor(sf::Color(55, 29, 16));
+	this->branchRight.setOutlineColor(sf::Color(95, 69, 56));
+	this->branchRight.setOutlineThickness(1.f);
 }
 
 Game::Game() {
 	this->initVar();
 	this->initWindow();
 	this->initTree();
+	this->initBranchesLeft();
+	this->initBranchesRight();
 }
 
 Game::~Game() {
@@ -42,6 +61,19 @@ Game::~Game() {
 const bool Game::running() const
 {
 	return this->window->isOpen();
+}
+
+
+void Game::spawnBranches()
+{
+	if (helpBranches.front() == 1) {
+		this->branches.push_back(this->branchLeft);
+		helpBranches.erase(helpBranches.begin());
+	}
+	else if (helpBranches.front() = 2) {
+		this->branches.push_back(this->branchRight);
+		helpBranches.erase(helpBranches.begin());
+	}
 }
 
 void Game::spawnTree()
@@ -79,14 +111,20 @@ void Game::updateTree()
 		for (auto &e : this->trees) {
 			e.move(0.f, 100.f);
 			}
+		for (auto& e : this->branches) {
+			e.move(0.f, 100.f);
+		}
+		int random = (rand() % 3);
+		this->helpBranches.push_back(random);
 		this->spawnTree();
+		this->spawnBranches();
 	}
 	
 	if (this->loseTimer == 0) {
 		this->window->close();
 	}
 	else {
-		this->loseTimer -= 1.f;
+		//this->loseTimer -= 1.f;
 	}
 
 }
@@ -99,12 +137,21 @@ void Game::render()
 		
 	this->renderTree();
 
+	this->renderBranches();
+
 	this->window->display();
 }
 
 void Game::renderTree()
 {
 	for (auto &e : this->trees) {
+		this->window->draw(e);
+	}
+}
+
+void Game::renderBranches()
+{
+	for (auto& e : this->branches) {
 		this->window->draw(e);
 	}
 }
