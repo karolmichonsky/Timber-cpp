@@ -29,6 +29,7 @@ private:
 
 	vector<sf::RectangleShape> trees;
 	vector<int> helpBranches;
+	vector<int> helpLose;
 	vector<sf::RectangleShape> branches;
 	sf::RectangleShape branchLeft;
 	sf::RectangleShape branchRight;

@@ -24,17 +24,13 @@ void Game::initTree()
 	this->tree.setPosition(300, 0);
 	this->tree.setSize(sf::Vector2f(200.f, 100.f));
 	this->tree.setFillColor(sf::Color(55, 29, 16));
-	this->tree.setOutlineColor(sf::Color(95, 69, 56));
-	this->tree.setOutlineThickness(1.f);
 }
 
 void Game::initBranchesLeft()
 {
 	this->branchLeft.setPosition(100, 50);
 	this->branchLeft.setSize(sf::Vector2f(200.f, 10.f));
-	this->branchLeft.setFillColor(sf::Color(55, 29, 16));
-	this->branchLeft.setOutlineColor(sf::Color(95, 69, 56));
-	this->branchLeft.setOutlineThickness(1.f);
+	this->branchLeft.setFillColor(sf::Color(55, 29, 16));;
 }
 
 void Game::initBranchesRight()
@@ -42,14 +38,18 @@ void Game::initBranchesRight()
 	this->branchRight.setPosition(500, 50);
 	this->branchRight.setSize(sf::Vector2f(200.f, 10.f));
 	this->branchRight.setFillColor(sf::Color(55, 29, 16));
-	this->branchRight.setOutlineColor(sf::Color(95, 69, 56));
-	this->branchRight.setOutlineThickness(1.f);
+}
+
+void Game::initBranchesHollow()
+{
+	this->branchLeft.setSize(sf::Vector2f(0.f, 0.f));
 }
 
 Game::Game() {
 	this->initVar();
 	this->initWindow();
 	this->initTree();
+	this->initBranchesHollow();
 	this->initBranchesLeft();
 	this->initBranchesRight();
 }
@@ -66,12 +66,18 @@ const bool Game::running() const
 
 void Game::spawnBranches()
 {
-	if (helpBranches.front() == 1) {
-		this->branches.push_back(this->branchLeft);
-		helpBranches.erase(helpBranches.begin());
+	if (helpBranches.front() > 0) {
+		if (helpBranches.front() == 1) {
+			this->branches.push_back(this->branchLeft);
+			helpBranches.erase(helpBranches.begin());
+		}
+		else{
+			this->branches.push_back(this->branchRight);
+			helpBranches.erase(helpBranches.begin());
+		}
 	}
-	else if (helpBranches.front() = 2) {
-		this->branches.push_back(this->branchRight);
+	else{
+		this->branches.push_back(this->branchHollow);
 		helpBranches.erase(helpBranches.begin());
 	}
 }
@@ -90,10 +96,20 @@ void Game::pollEvents()
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
+				if (this->helpLose[0] == 1) {
+					this->window->close();
+				}
 				this->trees.erase(this->trees.begin());
+				this->branches.erase(this->branches.begin());
+				this->helpLose.erase(this->helpLose.begin());
 			}
 			else if (event.key.code == sf::Keyboard::D) {
+				if (this->helpLose[0] == 2) {
+					this->window->close();
+				}
 				this->trees.erase(this->trees.begin());
+				this->branches.erase(this->branches.begin());
+				this->helpLose.erase(this->helpLose.begin());
 			}
 		}
 	}
@@ -116,6 +132,7 @@ void Game::updateTree()
 		}
 		int random = (rand() % 3);
 		this->helpBranches.push_back(random);
+		this->helpLose.push_back(random);
 		this->spawnTree();
 		this->spawnBranches();
 	}
