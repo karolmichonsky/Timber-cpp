@@ -21,7 +21,7 @@ void Game::initWindow()
 
 void Game::initTree()
 {
-	this->tree.setPosition(300, 400);
+	this->tree.setPosition(300, 0);
 	this->tree.setSize(sf::Vector2f(200.f, 100.f));
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 	this->tree.setOutlineColor(sf::Color(95, 69, 56));
@@ -46,49 +46,9 @@ const bool Game::running() const
 
 void Game::spawnTree()
 {
-	this->tree.setPosition(300, 0);
-	this->tree.setFillColor(sf::Color(55, 29, 16));
 	this->trees.push_back(this->tree);
-	this->treeCounter += 1;
 }
 
-void Game::displayBranches()
-{
-	/*system("cls");
-	vector<int> branchesCopy;
-	for (int i = 0; i < branches.size(); i++)
-		branchesCopy.push_back(branches[i]);
-
-	for (int i = 0; i < 5; i++) {
-		if (branchesCopy[i] == 0) {
-			cout << "--[   ]  " << endl;
-		}
-		else if (branchesCopy[i] == 1) {
-			cout << "  [   ]--  " << endl;
-		}
-		else {
-			cout << "  [   ]" << endl;
-		}
-	}*/
-}
-
-void Game::createBranches()
-{
-	/*srand(time(0));
-	for (int i = 0; i < 5; i++) {
-		int random = (rand() % 3);
-		branches.push_back(random);
-	}
-	displayBranches(branches);*/
-}
-
-void Game::updateBranches()
-{
-	/*srand(time(0));
-	int random = (rand() % 3);
-	branches.pop_back();
-	branches.insert(branches.begin(), random);*/
-}
 
 void Game::pollEvents()
 {
@@ -97,23 +57,11 @@ void Game::pollEvents()
 			this->window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
-			int random = (rand() % 3);
 			if (event.key.code == sf::Keyboard::A) {
-				/*if (branches[4] == 0) {
-					this->window->close();
-				}
-				branches.pop_back();
-				branches.insert(branches.begin(), random);
-				displayBranches(branches);*/
-
+				this->trees.erase(this->trees.begin());
 			}
 			else if (event.key.code == sf::Keyboard::D) {
-				/*if (branches[4] == 1) {
-					this->window->close();
-				}
-				branches.pop_back();
-				branches.insert(branches.begin(), random);
-				displayBranches(branches);*/
+				this->trees.erase(this->trees.begin());
 			}
 		}
 	}
@@ -122,7 +70,6 @@ void Game::pollEvents()
 void Game::update()
 {
 	this->pollEvents();
-
 	this->updateTree();
 }
 

@@ -41,9 +41,6 @@ public:
 	const bool running() const;
 
 	void spawnTree();
-	void displayBranches();
-	void createBranches();
-	void updateBranches();
 	void pollEvents();
 	void update();
 	void updateTree();
