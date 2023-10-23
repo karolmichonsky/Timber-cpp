@@ -23,6 +23,7 @@ private:
 	sf::Event event;
 
 	int points;
+	int gameOn;
 	float loseTimer;
 	float loseTimerMax;
 	int treeCounter;
@@ -49,7 +50,8 @@ public:
 
 	const bool running() const;
 	
-	
+	void treeHandle();
+	void timeHandle();
 	void spawnBranches();
 	void spawnTree();
 	void pollEvents();

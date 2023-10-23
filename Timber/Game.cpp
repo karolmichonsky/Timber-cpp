@@ -7,6 +7,7 @@ void Game::initVar()
 	this->points = 0;
 	this->loseTimerMax = 1000.f;
 	this->loseTimer = this->loseTimerMax;
+	this->gameOn = 0;
 
 }
 
@@ -64,16 +65,33 @@ const bool Game::running() const
 }
 
 
+void Game::treeHandle()
+{
+	this->trees.erase(this->trees.begin());
+	this->branches.erase(this->branches.begin());
+	this->helpLose.erase(this->helpLose.begin());
+	this->timeHandle();
+}
+
+void Game::timeHandle()
+{
+	this->gameOn = 1;
+	this->loseTimer += 30.f;
+	if (this->loseTimer > this->loseTimerMax) {
+		this->loseTimer = this->loseTimerMax;
+	}
+}
+
 void Game::spawnBranches()
 {
 	if (helpBranches.front() > 0) {
 		if (helpBranches.front() == 1) {
 			this->branches.push_back(this->branchLeft);
-			helpBranches.erase(helpBranches.begin());
+			this->helpBranches.erase(this->helpBranches.begin());
 		}
 		else{
 			this->branches.push_back(this->branchRight);
-			helpBranches.erase(helpBranches.begin());
+			this->helpBranches.erase(this->helpBranches.begin());
 		}
 	}
 	else{
@@ -99,17 +117,16 @@ void Game::pollEvents()
 				if (this->helpLose[0] == 1) {
 					this->window->close();
 				}
-				this->trees.erase(this->trees.begin());
-				this->branches.erase(this->branches.begin());
-				this->helpLose.erase(this->helpLose.begin());
+				this->treeHandle();
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[0] == 2) {
 					this->window->close();
 				}
-				this->trees.erase(this->trees.begin());
-				this->branches.erase(this->branches.begin());
-				this->helpLose.erase(this->helpLose.begin());
+				this->treeHandle();
+			}
+			else if (event.key.code == sf::Keyboard::Escape) {
+				this->gameOn = 0;
 			}
 		}
 	}
@@ -136,13 +153,15 @@ void Game::updateTree()
 		this->spawnTree();
 		this->spawnBranches();
 	}
+	if (gameOn == 1) {
+		if (this->loseTimer == 0) {
+			this->window->close();
+		}
+		else {
+			this->loseTimer -= 1.f;
+		}
+	}
 	
-	if (this->loseTimer == 0) {
-		this->window->close();
-	}
-	else {
-		//this->loseTimer -= 1.f;
-	}
 
 }
 
