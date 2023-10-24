@@ -27,6 +27,33 @@ void Game::initTree()
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 }
 
+
+
+void Game::lumberAction()
+{
+	textureLumberAction.loadFromFile("lumber-action.png");
+	sf::Sprite spriteLumberAction(textureLumberAction);
+	spriteLumberAction.setPosition(400, 400);
+	spriteLumberAction.setScale(1.5, 1.5);
+	this->window->draw(spriteLumberAction);
+}
+
+void Game::lumberAway()
+{
+	textureLumberAway.loadFromFile("lumber-away.png");
+	sf::Sprite spriteLumberAway(textureLumberAway);
+	spriteLumberAway.setPosition(200, 400);
+	spriteLumberAway.setScale(1.5, 1.5);
+	this->window->draw(spriteLumberAway);
+}
+
+void Game::initFloor()
+{
+	this->floor.setPosition(0, 400);
+	this->floor.setSize(sf::Vector2f(800.f, 200.f));
+	this->floor.setFillColor(sf::Color(0, 64, 0));
+}
+
 void Game::initBranchesLeft()
 {
 	this->branchLeft.setPosition(100, 50);
@@ -49,7 +76,10 @@ void Game::initBranchesHollow()
 Game::Game() {
 	this->initVar();
 	this->initWindow();
+	this->initFloor();
 	this->initTree();
+	this->lumberAway();
+	this->lumberAction();
 	this->initBranchesHollow();
 	this->initBranchesLeft();
 	this->initBranchesRight();
@@ -84,7 +114,7 @@ void Game::timeHandle()
 
 void Game::spawnBranches()
 {
-	if (helpBranches.front() > 0) {
+	if (this->helpBranches.front() > 0) {
 		if (helpBranches.front() == 1) {
 			this->branches.push_back(this->branchLeft);
 			this->helpBranches.erase(this->helpBranches.begin());
@@ -96,7 +126,7 @@ void Game::spawnBranches()
 	}
 	else{
 		this->branches.push_back(this->branchHollow);
-		helpBranches.erase(helpBranches.begin());
+		this->helpBranches.erase(helpBranches.begin());
 	}
 }
 
@@ -118,6 +148,7 @@ void Game::pollEvents()
 					this->window->close();
 				}
 				this->treeHandle();
+				this->lumberAction();
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[0] == 2) {
@@ -135,11 +166,15 @@ void Game::pollEvents()
 void Game::update()
 {
 	this->pollEvents();
-	this->updateTree();
+	this->gameUpdate();
 }
 
-void Game::updateTree()
+void Game::gameUpdate()
 {
+	if (this->trees.size() == 0) {
+		this->helpBranches.push_back(0);
+		this->helpLose.push_back(0);
+	}
 	if (this->trees.size() < 5) {
 		for (auto &e : this->trees) {
 			e.move(0.f, 100.f);
@@ -170,11 +205,15 @@ void Game::render()
 	this->window->clear(sf::Color(85,172,238));
 
 	this->update();
+
+	this->window->draw(floor);
 		
 	this->renderTree();
 
 	this->renderBranches();
-
+	
+	this->lumberAway();
+	
 	this->window->display();
 }
 

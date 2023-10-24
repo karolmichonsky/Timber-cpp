@@ -36,10 +36,18 @@ private:
 	sf::RectangleShape branchRight;
 	sf::RectangleShape branchHollow;
 	sf::RectangleShape tree;
+	sf::RectangleShape floor;
+	sf::Texture textureLumberAway;
+	sf::Sprite spriteLumberAway;
+	sf::Texture textureLumberAction;
+	sf::Sprite spriteLumberAction;
 
 	void initVar();
 	void initWindow();
+	void initFloor();
 	void initTree();
+	void lumberAway();
+	void lumberAction();
 	void initBranchesLeft();
 	void initBranchesRight();
 	void initBranchesHollow();
@@ -56,7 +64,7 @@ public:
 	void spawnTree();
 	void pollEvents();
 	void update();
-	void updateTree();
+	void gameUpdate();
 	void render();
 	void renderTree();
 	void renderBranches();
