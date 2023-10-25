@@ -23,7 +23,7 @@ void Game::initWindow()
 void Game::initTree()
 {
 	this->tree.setPosition(300, 0);
-	this->tree.setSize(sf::Vector2f(200.f, 100.f));
+	this->tree.setSize(sf::Vector2f(200, 100));
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 }
 
@@ -33,14 +33,20 @@ void Game::lumberAction()
 {
 	textureLumberAction.loadFromFile("lumber-action.png");
 	sf::Sprite spriteLumberAction(textureLumberAction);
-	spriteLumberAction.setPosition(400, 400);
+	spriteLumberAction.setPosition(200, 400);
 	spriteLumberAction.setScale(1.5, 1.5);
 	this->window->draw(spriteLumberAction);
 }
 
 void Game::lumberAway()
 {
-	textureLumberAway.loadFromFile("lumber-away.png");
+	
+	if (true) {
+		textureLumberAway.loadFromFile("lumber-action.png");
+	}
+	else {
+		textureLumberAway.loadFromFile("lumber-away.png");
+	}
 	sf::Sprite spriteLumberAway(textureLumberAway);
 	spriteLumberAway.setPosition(200, 400);
 	spriteLumberAway.setScale(1.5, 1.5);
@@ -56,14 +62,14 @@ void Game::initFloor()
 
 void Game::initBranchesLeft()
 {
-	this->branchLeft.setPosition(100, 50);
+	this->branchLeft.setPosition(100, 0);
 	this->branchLeft.setSize(sf::Vector2f(200.f, 10.f));
 	this->branchLeft.setFillColor(sf::Color(55, 29, 16));;
 }
 
 void Game::initBranchesRight()
 {
-	this->branchRight.setPosition(500, 50);
+	this->branchRight.setPosition(500, 0);
 	this->branchRight.setSize(sf::Vector2f(200.f, 10.f));
 	this->branchRight.setFillColor(sf::Color(55, 29, 16));
 }
@@ -144,14 +150,14 @@ void Game::pollEvents()
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
-				if (this->helpLose[0] == 1) {
+				if (this->helpLose[1] == 1) {
 					this->window->close();
 				}
 				this->treeHandle();
 				this->lumberAction();
 			}
 			else if (event.key.code == sf::Keyboard::D) {
-				if (this->helpLose[0] == 2) {
+				if (this->helpLose[1] == 2) {
 					this->window->close();
 				}
 				this->treeHandle();
@@ -176,17 +182,30 @@ void Game::gameUpdate()
 		this->helpLose.push_back(0);
 	}
 	if (this->trees.size() < 5) {
+		
 		for (auto &e : this->trees) {
-			e.move(0.f, 100.f);
+			e.move(0.f, 10.f);
 			}
 		for (auto& e : this->branches) {
-			e.move(0.f, 100.f);
+			e.move(0.f, 10.f);
 		}
 		int random = (rand() % 3);
 		this->helpBranches.push_back(random);
 		this->helpLose.push_back(random);
 		this->spawnTree();
 		this->spawnBranches();
+	}
+	for (auto& e : this->trees) {
+		sf::Vector2f pos = e.getPosition();
+		if (fmod(pos.y, 100) != 0) {
+			e.move(0.f, 9.f);
+		}
+	}
+	for (auto& e : this->branches) {
+		sf::Vector2f pos = e.getPosition();
+		if (fmod(pos.y, 100) != 81) {
+			e.move(0.f, 9.f);
+		}
 	}
 	if (gameOn == 1) {
 		if (this->loseTimer == 0) {
