@@ -9,7 +9,7 @@ void Game::initVar()
 	this->loseTimer = this->loseTimerMax;
 	this->gameOn = 0;
 	this->isChopping = 0;
-	this->isLeft = 0;
+	this->isLeft = 1;
 
 }
 
@@ -28,8 +28,6 @@ void Game::initTree()
 	this->tree.setSize(sf::Vector2f(200, 100));
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 }
-
-
 
 
 void Game::initFloor()
@@ -81,14 +79,25 @@ const bool Game::running() const
 void Game::lumber()
 {
 	
-	if (isChopping == 1) {
+	if (isChopping == 1 && isLeft == 1) {
 		textureLumberAway.loadFromFile("lumber-action-left.png");
 	}
-	else {
+	else if (isChopping == 1 && isLeft == 0) {
+		textureLumberAway.loadFromFile("lumber-action-right.png");
+	}
+	else if (isChopping == 0 && isLeft == 1) {
 		textureLumberAway.loadFromFile("lumber-away-left.png");
 	}
+	else if(isLeft == 0){
+		textureLumberAway.loadFromFile("lumber-away-right.png");
+	}
 	sf::Sprite spriteLumberAway(textureLumberAway);
-	spriteLumberAway.setPosition(200, 400);
+	if (isLeft == 1) {
+		spriteLumberAway.setPosition(200, 400);
+	}
+	else {
+		spriteLumberAway.setPosition(500, 400);
+	}
 	spriteLumberAway.setScale(1.5, 1.5);
 	this->window->draw(spriteLumberAway);
 }
@@ -145,6 +154,7 @@ void Game::spawnTree()
 
 void Game::pollEvents()
 {
+	cout << isLeft;
 	while (this->window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
 			this->window->close();
@@ -156,13 +166,15 @@ void Game::pollEvents()
 				}
 				this->treeHandle();
 				isChopping = 1;
-				
+				isLeft = 1;
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
 					this->window->close();
 				}
 				this->treeHandle();
+				isChopping = 1;
+				isLeft = 0;
 			}
 			else if (event.key.code == sf::Keyboard::Escape) {
 				this->gameOn = 0;
