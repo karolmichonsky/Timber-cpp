@@ -8,6 +8,8 @@ void Game::initVar()
 	this->loseTimerMax = 1000.f;
 	this->loseTimer = this->loseTimerMax;
 	this->gameOn = 0;
+	this->isChopping = 0;
+	this->isLeft = 0;
 
 }
 
@@ -29,29 +31,6 @@ void Game::initTree()
 
 
 
-void Game::lumberAction()
-{
-	textureLumberAction.loadFromFile("lumber-action.png");
-	sf::Sprite spriteLumberAction(textureLumberAction);
-	spriteLumberAction.setPosition(200, 400);
-	spriteLumberAction.setScale(1.5, 1.5);
-	this->window->draw(spriteLumberAction);
-}
-
-void Game::lumberAway()
-{
-	
-	if (true) {
-		textureLumberAway.loadFromFile("lumber-action.png");
-	}
-	else {
-		textureLumberAway.loadFromFile("lumber-away.png");
-	}
-	sf::Sprite spriteLumberAway(textureLumberAway);
-	spriteLumberAway.setPosition(200, 400);
-	spriteLumberAway.setScale(1.5, 1.5);
-	this->window->draw(spriteLumberAway);
-}
 
 void Game::initFloor()
 {
@@ -84,8 +63,7 @@ Game::Game() {
 	this->initWindow();
 	this->initFloor();
 	this->initTree();
-	this->lumberAway();
-	this->lumberAction();
+	this->lumber();
 	this->initBranchesHollow();
 	this->initBranchesLeft();
 	this->initBranchesRight();
@@ -100,6 +78,29 @@ const bool Game::running() const
 	return this->window->isOpen();
 }
 
+void Game::lumber()
+{
+	
+	if (isChopping == 1) {
+		textureLumberAway.loadFromFile("lumber-action-left.png");
+	}
+	else {
+		textureLumberAway.loadFromFile("lumber-away-left.png");
+	}
+	sf::Sprite spriteLumberAway(textureLumberAway);
+	spriteLumberAway.setPosition(200, 400);
+	spriteLumberAway.setScale(1.5, 1.5);
+	this->window->draw(spriteLumberAway);
+}
+
+void Game::lumberAnimation()
+{
+	sf::Clock clock;
+	if (clock.getElapsedTime().asMilliseconds() > 1000 && isChopping == 1) {
+		isChopping = 0;
+		clock.restart();
+	}
+}
 
 void Game::treeHandle()
 {
@@ -154,7 +155,8 @@ void Game::pollEvents()
 					this->window->close();
 				}
 				this->treeHandle();
-				this->lumberAction();
+				isChopping = 1;
+				
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
@@ -231,7 +233,7 @@ void Game::render()
 
 	this->renderBranches();
 	
-	this->lumberAway();
+	this->lumber();
 	
 	this->window->display();
 }

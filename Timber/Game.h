@@ -27,6 +27,7 @@ private:
 	float loseTimer;
 	float loseTimerMax;
 	int treeCounter;
+	int isLeft;
 
 	vector<sf::RectangleShape> trees;
 	vector<int> helpBranches;
@@ -47,8 +48,6 @@ private:
 	void initWindow();
 	void initFloor();
 	void initTree();
-	void lumberAway();
-	void lumberAction();
 	void initBranchesLeft();
 	void initBranchesRight();
 	void initBranchesHollow();
@@ -58,7 +57,10 @@ public:
 	virtual ~Game();
 
 	const bool running() const;
-	
+
+	int isChopping;
+	void lumber();
+	void lumberAnimation();
 	void treeHandle();
 	void timeHandle();
 	void spawnBranches();
