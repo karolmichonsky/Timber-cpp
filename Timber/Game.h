@@ -34,6 +34,7 @@ private:
 	vector<int> helpLose;
 	vector<sf::RectangleShape> branches;
 
+	sf::RectangleShape timer;
 	sf::RectangleShape branchLeft;
 	sf::RectangleShape branchRight;
 	sf::RectangleShape branchHollow;
@@ -51,12 +52,14 @@ private:
 	void initBranchesLeft();
 	void initBranchesRight();
 	void initBranchesHollow();
+	void initTimer();
 public:
 	//Konstruktor i destruktor
 	Game();
 	virtual ~Game();
 
 	const bool running() const;
+
 
 	int isChopping;
 	void lumber();

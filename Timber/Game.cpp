@@ -6,7 +6,7 @@ void Game::initVar()
 
 	this->points = 0;
 	this->loseTimerMax = 1000.f;
-	this->loseTimer = this->loseTimerMax;
+	this->loseTimer = 500.f;
 	this->gameOn = 0;
 	this->isChopping = 0;
 	this->isLeft = 1;
@@ -54,6 +54,16 @@ void Game::initBranchesRight()
 void Game::initBranchesHollow()
 {
 	this->branchLeft.setSize(sf::Vector2f(0.f, 0.f));
+}
+
+void Game::initTimer()
+{	
+	this->timer.setPosition(300, 50);
+	this->timer.setSize(sf::Vector2f(loseTimer/5, 15));
+	this->timer.setFillColor(sf::Color::Red);
+	this->timer.setOutlineColor(sf::Color(69,69,69));
+	this->timer.setOutlineThickness(5.f);
+
 }
 
 Game::Game() {
@@ -154,7 +164,6 @@ void Game::spawnTree()
 
 void Game::pollEvents()
 {
-	cout << isLeft;
 	while (this->window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
 			this->window->close();
@@ -242,6 +251,9 @@ void Game::render()
 	this->window->draw(floor);
 		
 	this->renderTree();
+
+	this->initTimer();
+	this->window->draw(timer);
 
 	this->renderBranches();
 	
