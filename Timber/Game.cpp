@@ -71,6 +71,7 @@ Game::Game() {
 	this->initWindow();
 	this->initFloor();
 	this->initTree();
+	this->initTimer();
 	this->lumber();
 	this->initBranchesHollow();
 	this->initBranchesLeft();
@@ -245,15 +246,14 @@ void Game::gameUpdate()
 void Game::render()
 {
 	this->window->clear(sf::Color(85,172,238));
-
-	this->update();
-
+	
 	this->window->draw(floor);
+	
+	this->window->draw(timer);
+	
+	this->update();
 		
 	this->renderTree();
-
-	this->initTimer();
-	this->window->draw(timer);
 
 	this->renderBranches();
 	
