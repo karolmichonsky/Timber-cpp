@@ -29,6 +29,9 @@ private:
 	int treeCounter;
 	int isLeft;
 
+	sf::Font font;
+	sf::Text text;
+
 	vector<sf::RectangleShape> trees;
 	vector<int> helpBranches;
 	vector<int> helpLose;
@@ -45,6 +48,7 @@ private:
 	sf::Texture textureLumberAction;
 	sf::Sprite spriteLumberAction;
 
+	void initText();
 	void initVar();
 	void initWindow();
 	void initFloor();
@@ -62,6 +66,7 @@ public:
 
 
 	int isChopping;
+	void updatePoints();
 	void lumber();
 	void lumberAnimation();
 	void treeHandle();

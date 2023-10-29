@@ -29,6 +29,14 @@ void Game::initTree()
 	this->tree.setFillColor(sf::Color(55, 29, 16));
 }
 
+void Game::initText()
+{
+	this->font.loadFromFile("GAMERIA.ttf");
+	this->text.setFont(font);
+	this->text.setPosition(400, 0);
+	string stringPoints = to_string(points);
+	this->text.setString(stringPoints);
+}
 
 void Game::initFloor()
 {
@@ -68,6 +76,7 @@ void Game::initTimer()
 
 Game::Game() {
 	this->initVar();
+	this->initText();
 	this->initWindow();
 	this->initFloor();
 	this->initTree();
@@ -85,6 +94,16 @@ Game::~Game() {
 const bool Game::running() const
 {
 	return this->window->isOpen();
+}
+
+void Game::updatePoints()
+{
+	points++;
+	if (points >= 10) {
+		this->text.setPosition(390, 0);
+	}
+	string stringPoints = to_string(points);
+	this->text.setString(stringPoints);
 }
 
 void Game::lumber()
@@ -174,6 +193,7 @@ void Game::pollEvents()
 				if (this->helpLose[1] == 1) {
 					this->window->close();
 				}
+				this->updatePoints();
 				this->treeHandle();
 				isChopping = 1;
 				isLeft = 1;
@@ -183,6 +203,7 @@ void Game::pollEvents()
 					this->window->close();
 				}
 				this->treeHandle();
+				this->updatePoints();
 				isChopping = 1;
 				isLeft = 0;
 			}
@@ -249,14 +270,15 @@ void Game::render()
 	
 	this->window->draw(floor);
 	
-	this->window->draw(timer);
-	
-	this->update();
-		
 	this->renderTree();
+
+	this->initTimer();
+	this->window->draw(timer);
 
 	this->renderBranches();
 	
+	this->window->draw(text);
+
 	this->lumber();
 	
 	this->window->display();
