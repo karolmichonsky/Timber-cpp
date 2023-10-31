@@ -22,6 +22,7 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event event;
 
+	int isChopping;
 	int points;
 	int gameOn;
 	float loseTimer;
@@ -63,9 +64,8 @@ public:
 	virtual ~Game();
 
 	const bool running() const;
-
-
-	int isChopping;
+	void setIsChopping();
+	int getIsChopping();
 	void updatePoints();
 	void lumber();
 	void lumberAnimation();

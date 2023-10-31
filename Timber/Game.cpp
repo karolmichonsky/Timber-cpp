@@ -96,6 +96,16 @@ const bool Game::running() const
 	return this->window->isOpen();
 }
 
+void Game::setIsChopping()
+{
+	isChopping = 1;
+}
+
+int Game::getIsChopping()
+{
+	return isChopping;
+}
+
 void Game::updatePoints()
 {
 	points++;
