@@ -12,7 +12,8 @@ int main(void) {
 	while (game.running()) {
 		switch(menu.accessGameState()){
 			case 0:
-				cout << "aa";
+				cout << menu.accessGameState();
+				menu.updateMenu();
 				break;
 			case 1:
 				game.update();
@@ -23,6 +24,8 @@ int main(void) {
 				game.lumberAnimation();
 				game.render();
 				break;
+			case 2:
+				cout << "aa";
 		}
 	}
 	return 0;
