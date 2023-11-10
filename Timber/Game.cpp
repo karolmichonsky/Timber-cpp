@@ -2,8 +2,6 @@
 
 void Game::initVar()
 {
-	this->window = nullptr;
-
 	this->points = 0;
 	this->loseTimerMax = 1000.f;
 	this->loseTimer = 500.f;
@@ -11,15 +9,6 @@ void Game::initVar()
 	this->isChopping = 0;
 	this->isLeft = 1;
 
-}
-
-void Game::initWindow()
-{
-	this->videoMode.height = 600;
-	this->videoMode.width = 800;
-	this->videoMode.getDesktopMode;
-	this->window = new sf::RenderWindow(this->videoMode, "TimberTime");
-	this->window->setFramerateLimit(60);
 }
 
 void Game::initTree()
@@ -75,9 +64,9 @@ void Game::initTimer()
 }
 
 Game::Game() {
+	win.initWindow();
 	this->initVar();
-	this->initText();
-	this->initWindow();
+	this->initText();;
 	this->initFloor();
 	this->initTree();
 	this->initTimer();
@@ -88,12 +77,11 @@ Game::Game() {
 }
 
 Game::~Game() {
-	delete this->window;
 }
 
 const bool Game::running() const
 {
-	return this->window->isOpen();
+	return win.window->isOpen();
 }
 
 void Game::setIsChopping()
@@ -139,7 +127,7 @@ void Game::lumber()
 		spriteLumberAway.setPosition(500, 400);
 	}
 	spriteLumberAway.setScale(1.5, 1.5);
-	this->window->draw(spriteLumberAway);
+	win.window->draw(spriteLumberAway);
 }
 
 void Game::lumberAnimation()
@@ -194,14 +182,14 @@ void Game::spawnTree()
 
 void Game::pollEvents()
 {
-	while (this->window->pollEvent(this->event)) {
+	while (win.window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
-			this->window->close();
+			win.window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
 				if (this->helpLose[1] == 1) {
-					this->window->close();
+					win.window->close();
 				}
 				this->updatePoints();
 				this->treeHandle();
@@ -210,7 +198,7 @@ void Game::pollEvents()
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
-					this->window->close();
+					win.window->close();
 				}
 				this->treeHandle();
 				this->updatePoints();
@@ -264,7 +252,7 @@ void Game::gameUpdate()
 	}
 	if (gameOn == 1) {
 		if (this->loseTimer == 0) {
-			this->window->close();
+			win.window->close();
 		}
 		else {
 			this->loseTimer -= 1.f;
@@ -276,34 +264,34 @@ void Game::gameUpdate()
 
 void Game::render()
 {
-	this->window->clear(sf::Color(85,172,238));
+	win.window->clear(sf::Color(85,172,238));
 	
-	this->window->draw(floor);
+	win.window->draw(floor);
 	
 	this->renderTree();
 
 	this->initTimer();
-	this->window->draw(timer);
+	win.window->draw(timer);
 
 	this->renderBranches();
 	
-	this->window->draw(text);
+	win.window->draw(text);
 
 	this->lumber();
 	
-	this->window->display();
+	win.window->display();
 }
 
 void Game::renderTree()
 {
 	for (auto &e : this->trees) {
-		this->window->draw(e);
+		win.window->draw(e);
 	}
 }
 
 void Game::renderBranches()
 {
 	for (auto& e : this->branches) {
-		this->window->draw(e);
+		win.window->draw(e);
 	}
 }

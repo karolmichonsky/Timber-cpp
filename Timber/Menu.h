@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Window.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -12,15 +13,15 @@ using namespace std;
 class Menu
 {
 private:
-	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
+
+	Window win;
 	sf::Event event;
 
 	sf::RectangleShape buttonNewGame;
 	sf::RectangleShape buttonExit;
 	sf::RectangleShape buttonResume;
 	
-	int gameState = 0;
+	int gameState = 1;
 	void initButtonNewGame();
 	void initButtonExit();
 public:

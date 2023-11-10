@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#include "Window.h"
+
 #include <vector>
 #include <iostream>
 #include <cstdlib>
@@ -17,9 +19,9 @@ using namespace std;
 
 class Game
 {
-private:
-	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
+public:
+	Window win;
+
 	sf::Event event;
 
 	int isChopping;
@@ -51,7 +53,6 @@ private:
 
 	void initText();
 	void initVar();
-	void initWindow();
 	void initFloor();
 	void initTree();
 	void initBranchesLeft();

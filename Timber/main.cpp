@@ -5,16 +5,17 @@ int main(void) {
 	
 	srand(static_cast<unsigned>(time(NULL)));	
 
+	Window win;
 	Game game;
 	Menu menu;
 	sf::Clock clock;
-
+	//menu.updateMenu();
 	while (game.running()) {
 		switch(menu.accessGameState()){
 			case 0:
-				cout << menu.accessGameState();
+				/*cout << menu.accessGameState();
 				menu.updateMenu();
-				break;
+				break;*/
 			case 1:
 				game.update();
 				if (clock.getElapsedTime().asMilliseconds() > 2000 && game.getIsChopping() == 1) {

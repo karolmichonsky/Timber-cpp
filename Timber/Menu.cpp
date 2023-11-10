@@ -1,12 +1,13 @@
 #include "Menu.h"
 
 Menu::Menu() {
+	/*this->initWindow();*/
 	this->initButtonNewGame();
 	this->initButtonExit();
+	
 }
 
 Menu::~Menu() {
-	delete this->window;
 }
 
 void Menu::initButtonNewGame()
@@ -27,7 +28,13 @@ void Menu::initButtonExit()
 
 void Menu::pollEvents()
 {
-	
+	while (win.window->pollEvent(this->event)) {
+		if (this->event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::A) {
+				gameState = 1;
+			}
+		}
+	}
 }
 
 int Menu::accessGameState()
@@ -37,7 +44,7 @@ int Menu::accessGameState()
 
 void Menu::mainMenu()
 {
-	this->window->clear(sf::Color::Black);
+	win.window->clear(sf::Color::Black);
 
 }
 
@@ -51,5 +58,6 @@ void Menu::renderMenu()
 
 void Menu::updateMenu()
 {
+	
 	this->pollEvents();
 }
