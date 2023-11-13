@@ -34,6 +34,7 @@ int main(void) {
 				break;
 			case 2:
 				cout << "aa";
+				break;
 		}
 	}
 	return 0;

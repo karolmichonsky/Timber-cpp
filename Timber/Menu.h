@@ -15,13 +15,20 @@ private:
 	sf::RenderWindow* window;
 	sf::Event event;
 
+	sf::Font font;
+	sf::Text textNewGame;
+	sf::Text textStyle;
+	sf::Text textLeaderboard;
+	sf::Text textLeave;
+
 	sf::RectangleShape buttonNewGame;
 	sf::RectangleShape buttonExit;
 	sf::RectangleShape buttonResume;
 	
-	int gameState = 1;
+	int gameState = 0;
 	void initButtonNewGame();
 	void initButtonExit();
+	void initText();
 public:
 	Menu(sf::RenderWindow* window);
 	virtual ~Menu();
