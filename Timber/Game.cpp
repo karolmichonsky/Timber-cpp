@@ -2,7 +2,6 @@
 
 void Game::initVar()
 {
-	this->window = nullptr;
 
 	this->points = 0;
 	this->loseTimerMax = 1000.f;
@@ -13,14 +12,6 @@ void Game::initVar()
 
 }
 
-void Game::initWindow()
-{
-	this->videoMode.height = 600;
-	this->videoMode.width = 800;
-	this->videoMode.getDesktopMode;
-	this->window = new sf::RenderWindow(this->videoMode, "TimberTime");
-	this->window->setFramerateLimit(60);
-}
 
 void Game::initTree()
 {
@@ -74,10 +65,10 @@ void Game::initTimer()
 
 }
 
-Game::Game() {
+Game::Game(sf::RenderWindow* window) {
+	this->window = window;
 	this->initVar();
 	this->initText();
-	this->initWindow();
 	this->initFloor();
 	this->initTree();
 	this->initTimer();
@@ -88,7 +79,7 @@ Game::Game() {
 }
 
 Game::~Game() {
-	delete this->window;
+	//delete this->window;
 }
 
 const bool Game::running() const

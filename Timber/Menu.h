@@ -13,18 +13,17 @@ class Menu
 {
 private:
 	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
 	sf::Event event;
 
 	sf::RectangleShape buttonNewGame;
 	sf::RectangleShape buttonExit;
 	sf::RectangleShape buttonResume;
 	
-	int gameState = 0;
+	int gameState = 1;
 	void initButtonNewGame();
 	void initButtonExit();
 public:
-	Menu();
+	Menu(sf::RenderWindow* window);
 	virtual ~Menu();
 
 	void pollEvents();

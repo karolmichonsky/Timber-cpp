@@ -1,12 +1,13 @@
 #include "Menu.h"
 
-Menu::Menu() {
+Menu::Menu(sf::RenderWindow* window) {
+	this->window = window;
 	this->initButtonNewGame();
 	this->initButtonExit();
 }
 
 Menu::~Menu() {
-	delete this->window;
+	//delete this->window;
 }
 
 void Menu::initButtonNewGame()
@@ -37,7 +38,7 @@ int Menu::accessGameState()
 
 void Menu::mainMenu()
 {
-	this->window->clear(sf::Color::Black);
+	window->draw(buttonExit);
 
 }
 
@@ -51,5 +52,7 @@ void Menu::renderMenu()
 
 void Menu::updateMenu()
 {
+	
 	this->pollEvents();
+	mainMenu();
 }

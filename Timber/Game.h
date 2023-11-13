@@ -19,7 +19,6 @@ class Game
 {
 private:
 	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
 	sf::Event event;
 
 	int isChopping;
@@ -51,7 +50,6 @@ private:
 
 	void initText();
 	void initVar();
-	void initWindow();
 	void initFloor();
 	void initTree();
 	void initBranchesLeft();
@@ -60,7 +58,7 @@ private:
 	void initTimer();
 public:
 	//Konstruktor i destruktor
-	Game();
+	Game(sf::RenderWindow* window);
 	virtual ~Game();
 
 	const bool running() const;
