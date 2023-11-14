@@ -27,22 +27,34 @@ void Menu::initButtonExit()
 	this->buttonNewGame.setOutlineColor(sf::Color::Black);
 }
 
+void Menu::centerText(sf::Text text, int height)
+{
+	rect = text.getGlobalBounds().getSize();
+	text.setPosition(400 - rect.x / 2, height);
+}
+
 void Menu::initText()
 {
 	this->font.loadFromFile("GAMERIA.ttf");
-	this->textNewGame.setFont(font);
-	this->textNewGame.setPosition(300, 100);
-	this->textStyle.setFont(font);
-	this->textStyle.setPosition(300, 200);
-	this->textLeave.setFont(font);
-	this->textLeaderboard.setPosition(300, 300);
-	this->textLeaderboard.setFont(font);
-	this->textLeave.setPosition(300, 400);
+	textNewGame.setFont(font);
+	textStyle.setFont(font);
+	textLeaderboard.setFont(font);
+	textLeave.setFont(font);
 	this->textNewGame.setString("Nowa gra");
 	this->textStyle.setString("Zmien skorke");
 	this->textLeaderboard.setString("Tabela wynikow");
 	this->textLeave.setString("Wyjdz z gry");
+	rect = textNewGame.getGlobalBounds().getSize();
+	textNewGame.setPosition(400 - rect.x / 2, 100);
+	rect = textStyle.getGlobalBounds().getSize();
+	textStyle.setPosition(400 - rect.x / 2, 200);
+	rect = textLeaderboard.getGlobalBounds().getSize();
+	textLeaderboard.setPosition(400 - rect.x / 2, 300);
+	rect = textLeave.getGlobalBounds().getSize();
+	textLeave.setPosition(400 - rect.x / 2, 400);
 }
+
+
 
 void Menu::pollEvents()
 {

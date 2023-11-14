@@ -21,6 +21,9 @@ private:
 	sf::Text textLeaderboard;
 	sf::Text textLeave;
 
+	vector<sf::Text> textArray;
+	sf::Vector2f rect;
+
 	sf::RectangleShape buttonNewGame;
 	sf::RectangleShape buttonExit;
 	sf::RectangleShape buttonResume;
@@ -33,6 +36,7 @@ public:
 	Menu(sf::RenderWindow* window);
 	virtual ~Menu();
 
+	void centerText(sf::Text text, int height);
 	void pollEvents();
 	int accessGameState();
 	void mainMenu();
