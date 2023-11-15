@@ -28,6 +28,7 @@ private:
 	sf::RectangleShape buttonExit;
 	sf::RectangleShape buttonResume;
 	
+	int menuState = 0;
 	int gameState = 0;
 	void initButtonNewGame();
 	void initButtonExit();
@@ -36,7 +37,7 @@ public:
 	Menu(sf::RenderWindow* window);
 	virtual ~Menu();
 
-	void centerText(sf::Text text, int height);
+	void selectedMenu();
 	void pollEvents();
 	int accessGameState();
 	void mainMenu();

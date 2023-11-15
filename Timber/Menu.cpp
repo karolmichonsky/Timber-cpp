@@ -27,12 +27,6 @@ void Menu::initButtonExit()
 	this->buttonNewGame.setOutlineColor(sf::Color::Black);
 }
 
-void Menu::centerText(sf::Text text, int height)
-{
-	rect = text.getGlobalBounds().getSize();
-	text.setPosition(400 - rect.x / 2, height);
-}
-
 void Menu::initText()
 {
 	this->font.loadFromFile("GAMERIA.ttf");
@@ -55,6 +49,32 @@ void Menu::initText()
 }
 
 
+
+void Menu::selectedMenu()
+{
+	switch (menuState) {
+	case 0:
+		textLeave.setFillColor(sf::Color::White);
+		textNewGame.setFillColor(sf::Color::Red);
+		textStyle.setFillColor(sf::Color::White);
+		break;
+	case 1:
+		textNewGame.setFillColor(sf::Color::White);
+		textStyle.setFillColor(sf::Color::Red);
+		textLeaderboard.setFillColor(sf::Color::White);
+		break;
+	case 2:
+		textStyle.setFillColor(sf::Color::White);
+		textLeaderboard.setFillColor(sf::Color::Red);
+		textLeave.setFillColor(sf::Color::White);
+		break;
+	case 3:
+		textLeaderboard.setFillColor(sf::Color::White);
+		textLeave.setFillColor(sf::Color::Red);
+		textNewGame.setFillColor(sf::Color::White);
+		break;
+	}
+}
 
 void Menu::pollEvents()
 {
@@ -85,6 +105,7 @@ void Menu::renderMenu()
 
 void Menu::updateMenu()
 {
+	selectedMenu();
 	pollEvents();
 	window->clear(sf::Color(85, 172, 238));
 	window->draw(textNewGame);
