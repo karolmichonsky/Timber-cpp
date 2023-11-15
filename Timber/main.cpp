@@ -20,10 +20,10 @@ int main(void) {
 
 	while (game.running()) {
 		switch(menu.accessGameState()){
-			case 0:
+			case -1:
 				menu.updateMenu();
 				break;
-			case 1:
+			case 0:
 				game.update();
 				if (clock.getElapsedTime().asMilliseconds() > 2000 && game.getIsChopping() == 1) {
 					game.setIsChopping();
@@ -32,7 +32,7 @@ int main(void) {
 				game.lumberAnimation();
 				game.render();
 				break;
-			case 2:
+			case 1:
 				cout << "aa";
 				break;
 		}

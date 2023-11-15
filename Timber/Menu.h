@@ -29,7 +29,7 @@ private:
 	sf::RectangleShape buttonResume;
 	
 	int menuState = 0;
-	int gameState = 0;
+	int gameState = -1;
 	void initButtonNewGame();
 	void initButtonExit();
 	void initText();
