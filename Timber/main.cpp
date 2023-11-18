@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Menu.h"
+#include "Leaderboard.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -16,6 +17,7 @@ int main(void) {
 
 	Game game(&window);
 	Menu menu(&window);
+	Leaderboard leaderboard(int points);
 	sf::Clock clock;
 
 	while (game.running()) {
