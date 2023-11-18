@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Leaderboard.h"
 
 void Game::initVar()
 {
@@ -67,6 +68,7 @@ void Game::initTimer()
 
 Game::Game(sf::RenderWindow* window) {
 	this->window = window;
+	Leaderboard leaderboard(points);
 	this->initVar();
 	this->initText();
 	this->initFloor();
