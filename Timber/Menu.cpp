@@ -107,6 +107,11 @@ int Menu::accessGameState()
 	return this->gameState;
 }
 
+void Menu::backToMenu()
+{
+	gameState = -1;
+}
+
 void Menu::mainMenu()
 {
 

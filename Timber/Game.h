@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#include "Menu.h"
+
 #include <vector>
 #include <iostream>
 #include <cstdlib>
@@ -59,11 +61,13 @@ private:
 public:
 	//Konstruktor i destruktor
 	Game(sf::RenderWindow* window);
+
 	virtual ~Game();
 
 	const bool running() const;
 	void setIsChopping();
 	int getIsChopping();
+	float getLoseTimer();
 	void updatePoints();
 	void lumber();
 	void lumberAnimation();

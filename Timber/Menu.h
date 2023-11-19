@@ -40,6 +40,7 @@ public:
 	void selectedMenu();
 	void pollEvents();
 	int accessGameState();
+	void backToMenu();
 	void mainMenu();
 	void pauseGame();
 	void renderMenu();

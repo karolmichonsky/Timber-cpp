@@ -33,6 +33,9 @@ int main(void) {
 				}
 				game.lumberAnimation();
 				game.render();
+				if (game.getLoseTimer() == 0.0f) {
+					menu.backToMenu();
+				}
 				break;
 			case 3:
 				window.close();

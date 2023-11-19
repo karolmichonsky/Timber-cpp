@@ -99,6 +99,11 @@ int Game::getIsChopping()
 	return isChopping;
 }
 
+float Game::getLoseTimer()
+{
+	return loseTimer;
+}
+
 void Game::updatePoints()
 {
 	points++;
