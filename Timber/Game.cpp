@@ -66,7 +66,7 @@ void Game::initTimer()
 
 }
 
-Game::Game(sf::RenderWindow* window) {
+Game::Game(sf::RenderWindow* window, Menu* menu) : window(window), menu(menu) {
 	this->window = window;
 	Leaderboard leaderboard(points);
 	this->initVar();
@@ -199,7 +199,7 @@ void Game::pollEvents()
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
 				if (this->helpLose[1] == 1) {
-					this->window->close();
+					menu->backToMenu();
 				}
 				this->updatePoints();
 				this->treeHandle();
@@ -208,7 +208,7 @@ void Game::pollEvents()
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
-					this->window->close();
+					menu->backToMenu();
 				}
 				this->treeHandle();
 				this->updatePoints();

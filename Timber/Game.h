@@ -23,6 +23,8 @@ private:
 	sf::RenderWindow* window;
 	sf::Event event;
 
+	Menu* menu;
+
 	int isChopping;
 	int points;
 	int gameOn;
@@ -60,7 +62,7 @@ private:
 	void initTimer();
 public:
 	//Konstruktor i destruktor
-	Game(sf::RenderWindow* window);
+	Game(sf::RenderWindow* window, Menu* menu);
 
 	virtual ~Game();
 

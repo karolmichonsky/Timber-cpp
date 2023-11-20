@@ -15,8 +15,8 @@ int main(void) {
 	sf::RenderWindow window(vm, "Timber");
 	window.setFramerateLimit(60);
 
-	Game game(&window);
 	Menu menu(&window);
+	Game game(&window, &menu);
 	Leaderboard leaderboard(int points);
 	sf::Clock clock;
 
