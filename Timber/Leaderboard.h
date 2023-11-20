@@ -15,12 +15,14 @@ using namespace std;
 class Leaderboard
 {
 private:
+
+    Game* game;
+
     ofstream leaderboard;
-    int gamePoints;
 
 public:
 
-    Leaderboard(int points);
+    Leaderboard(Game* game);
     void saveLeaderboard();
 
 };

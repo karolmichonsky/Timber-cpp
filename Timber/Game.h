@@ -69,6 +69,7 @@ public:
 	const bool running() const;
 	void setIsChopping();
 	int getIsChopping();
+	int getGamePoints();
 	float getLoseTimer();
 	void updatePoints();
 	void lumber();

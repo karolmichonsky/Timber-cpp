@@ -1,6 +1,6 @@
 #include "Leaderboard.h"
 
-Leaderboard::Leaderboard(int points) : gamePoints(points)
+Leaderboard::Leaderboard(Game* game) : game(game)
 {
 	
 }
@@ -8,6 +8,6 @@ Leaderboard::Leaderboard(int points) : gamePoints(points)
 void Leaderboard::saveLeaderboard()
 {
 	leaderboard.open("leaderboard.txt");
-	leaderboard << gamePoints;
+	leaderboard << game->getGamePoints();
 	leaderboard.close();
 }

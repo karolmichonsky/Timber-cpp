@@ -68,7 +68,6 @@ void Game::initTimer()
 
 Game::Game(sf::RenderWindow* window, Menu* menu) : window(window), menu(menu) {
 	this->window = window;
-	Leaderboard leaderboard(points);
 	this->initVar();
 	this->initText();
 	this->initFloor();
@@ -97,6 +96,11 @@ void Game::setIsChopping()
 int Game::getIsChopping()
 {
 	return isChopping;
+}
+
+int Game::getGamePoints()
+{
+	return points;
 }
 
 float Game::getLoseTimer()
