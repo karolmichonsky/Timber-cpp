@@ -5,9 +5,21 @@ Leaderboard::Leaderboard(Game* game) : game(game)
 	
 }
 
+void Leaderboard::readLeaderboard()
+{
+	
+	leaderboardFileRead.open("leaderboard.txt");
+
+	while (getline(leaderboardFileRead, leaderboardText)) {
+		cout << leaderboardText;
+	}
+
+	leaderboardFileRead.close();
+}
+
 void Leaderboard::saveLeaderboard()
 {
-	leaderboard.open("leaderboard.txt");
-	leaderboard << game->getGamePoints();
-	leaderboard.close();
+	leaderboardFileWrite.open("leaderboard.txt");
+	leaderboardFileWrite << game->getGamePoints();
+	leaderboardFileWrite.close();
 }

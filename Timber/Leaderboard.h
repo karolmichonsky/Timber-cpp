@@ -18,11 +18,14 @@ private:
 
     Game* game;
 
-    ofstream leaderboard;
 
+    ofstream leaderboardFileWrite;
+    ifstream leaderboardFileRead;
+    string leaderboardText;
 public:
 
     Leaderboard(Game* game);
+    void readLeaderboard();
     void saveLeaderboard();
 
 };
