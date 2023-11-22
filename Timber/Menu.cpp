@@ -2,8 +2,6 @@
 
 Menu::Menu(sf::RenderWindow* window) {
 	this->window = window;
-	this->initButtonNewGame();
-	this->initButtonExit();
 	this->initText();
 }
 
@@ -11,21 +9,6 @@ Menu::~Menu() {
 	//delete this->window;
 }
 
-void Menu::initButtonNewGame()
-{
-	this->buttonNewGame.setPosition(200, 300);
-	this->buttonNewGame.setSize(sf::Vector2f(400, 200));
-	this->buttonNewGame.setFillColor(sf::Color::Green);
-	this->buttonNewGame.setOutlineColor(sf::Color::Black);
-}
-
-void Menu::initButtonExit()
-{
-	this->buttonNewGame.setPosition(200, 300);
-	this->buttonNewGame.setSize(sf::Vector2f(400, 200));
-	this->buttonNewGame.setFillColor(sf::Color::Green);
-	this->buttonNewGame.setOutlineColor(sf::Color::Black);
-}
 
 void Menu::initText()
 {
@@ -110,19 +93,6 @@ int Menu::accessGameState()
 void Menu::backToMenu()
 {
 	gameState = -1;
-}
-
-void Menu::mainMenu()
-{
-
-}
-
-void Menu::pauseGame()
-{
-}
-
-void Menu::renderMenu()
-{
 }
 
 void Menu::updateMenu()

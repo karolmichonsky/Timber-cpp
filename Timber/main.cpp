@@ -38,7 +38,6 @@ int main(void) {
 				}
 				break;
 			case 2:
-				leaderboard.saveLeaderboard();
 				leaderboard.readLeaderboard();
 				menu.backToMenu();
 				break;

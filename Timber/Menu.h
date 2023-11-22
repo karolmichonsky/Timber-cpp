@@ -23,15 +23,9 @@ private:
 
 	vector<sf::Text> textArray;
 	sf::Vector2f rect;
-
-	sf::RectangleShape buttonNewGame;
-	sf::RectangleShape buttonExit;
-	sf::RectangleShape buttonResume;
 	
 	int menuState = 0;
 	int gameState = -1;
-	void initButtonNewGame();
-	void initButtonExit();
 	void initText();
 public:
 	Menu(sf::RenderWindow* window);
@@ -41,9 +35,6 @@ public:
 	void pollEvents();
 	int accessGameState();
 	void backToMenu();
-	void mainMenu();
-	void pauseGame();
-	void renderMenu();
 	void updateMenu();
 };
 
