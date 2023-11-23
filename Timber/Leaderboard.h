@@ -17,16 +17,26 @@ class Leaderboard
 private:
 
     Game* game;
+    sf::RenderWindow* window;
+    sf::Event event;
 
+    sf::Text leaderboardTop1;
+    sf::Text leaderboardBackToMenu;
+    sf::Font font;
+    sf::Vector2f rect;
 
     ofstream leaderboardFileWrite;
     ifstream leaderboardFileRead;
-    string leaderboardText;
+    string leaderboardPoints;
 public:
 
-    Leaderboard(Game* game);
+    Leaderboard(sf::RenderWindow* window, Game* game);
+    void pollEvents();
+    void initText();
     void readLeaderboard();
     void saveLeaderboard();
+
+    void updateLeaderboard();
 
 };
 

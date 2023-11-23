@@ -17,7 +17,7 @@ int main(void) {
 
 	Menu menu(&window);
 	Game game(&window, &menu);
-	Leaderboard leaderboard(&game);
+	Leaderboard leaderboard(&window, &game);
 	sf::Clock clock;
 
 	while (game.running()) {
@@ -38,8 +38,7 @@ int main(void) {
 				}
 				break;
 			case 2:
-				leaderboard.readLeaderboard();
-				menu.backToMenu();
+				leaderboard.updateLeaderboard();
 				break;
 			case 3:
 				window.close();
