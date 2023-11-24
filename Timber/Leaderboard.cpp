@@ -10,9 +10,16 @@ void Leaderboard::readLeaderboard()
 {
 	
 	leaderboardFileRead.open("leaderboard.txt");
-
+	int a = 100;
 	while (getline(leaderboardFileRead, leaderboardPoints)) {
-		cout << leaderboardPoints;
+		font.loadFromFile("GAMERIA.ttf");
+		leaderboardTop1.setFont(font);
+		leaderboardTop1.setString(leaderboardPoints);
+		rect = leaderboardTop1.getGlobalBounds().getSize();
+		leaderboardTop1.setPosition(400 - rect.x / 2, a);
+		rect = leaderboardTop1.getGlobalBounds().getSize();
+		a += 100;
+		window->draw(leaderboardTop1);
 	}
 
 	leaderboardFileRead.close();
@@ -21,11 +28,6 @@ void Leaderboard::readLeaderboard()
 void Leaderboard::initText()
 {
 	font.loadFromFile("GAMERIA.ttf");
-	leaderboardTop1.setFont(font);
-	leaderboardTop1.setString(leaderboardPoints);
-	rect = leaderboardTop1.getGlobalBounds().getSize();
-	leaderboardTop1.setPosition(400 - rect.x / 2, 100);
-	rect = leaderboardTop1.getGlobalBounds().getSize();
 
 	leaderboardBackToMenu.setFont(font);
 	leaderboardBackToMenu.setString("Powrot");
@@ -50,9 +52,11 @@ void Leaderboard::pollEvents()
 
 void Leaderboard::updateLeaderboard()
 {
-
+	readLeaderboard();
 	window->clear(sf::Color(85, 172, 238));
+	cout << leaderboardPoints;
 	window->draw(leaderboardTop1);
 	window->draw(leaderboardBackToMenu);
+	window->display();
 
 }
