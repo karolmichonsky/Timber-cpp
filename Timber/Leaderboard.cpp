@@ -3,38 +3,40 @@
 Leaderboard::Leaderboard(sf::RenderWindow* window, Game* game) : game(game)
 {
 	this->window = window;
-	initText();
 }
 
 void Leaderboard::readLeaderboard()
 {
 	
 	leaderboardFileRead.open("leaderboard.txt");
-	int a = 100;
+	int leaderboardHelper = 0;
 	while (getline(leaderboardFileRead, leaderboardPoints)) {
-		font.loadFromFile("GAMERIA.ttf");
-		leaderboardTop1.setFont(font);
-		leaderboardTop1.setString(leaderboardPoints);
-		rect = leaderboardTop1.getGlobalBounds().getSize();
-		leaderboardTop1.setPosition(400 - rect.x / 2, a);
-		rect = leaderboardTop1.getGlobalBounds().getSize();
-		a += 100;
-		window->draw(leaderboardTop1);
+		switch (leaderboardHelper) {
+		case 0:
+			cout << leaderboardHelper << " " << leaderboardPoints << endl;
+			initText(leaderboardTop1, leaderboardPoints, 100);
+			break;
+		case 1:
+			cout << leaderboardHelper << " " << leaderboardPoints << endl;
+			initText(leaderboardTop2, leaderboardPoints, 200);
+			break;
+		case 2:
+			initText(leaderboardTop3, leaderboardPoints, 300);
+			break;
+		}
+		leaderboardHelper++;
 	}
 
 	leaderboardFileRead.close();
 }
 
-void Leaderboard::initText()
+void Leaderboard::initText(sf::Text &textVar, string textValue, int textHeight)
 {
 	font.loadFromFile("GAMERIA.ttf");
-
-	leaderboardBackToMenu.setFont(font);
-	leaderboardBackToMenu.setString("Powrot");
-	rect = leaderboardBackToMenu.getGlobalBounds().getSize();
-	leaderboardBackToMenu.setPosition(400 - rect.x / 2, 400);
-	rect = leaderboardBackToMenu.getGlobalBounds().getSize();
-	
+	textVar.setFont(font);
+	textVar.setString(textValue);
+	rect = textVar.getGlobalBounds().getSize();
+	textVar.setPosition(400 - rect.x / 2, textHeight);
 }
 
 void Leaderboard::saveLeaderboard()
@@ -54,8 +56,9 @@ void Leaderboard::updateLeaderboard()
 {
 	readLeaderboard();
 	window->clear(sf::Color(85, 172, 238));
-	cout << leaderboardPoints;
 	window->draw(leaderboardTop1);
+	window->draw(leaderboardTop2);
+	window->draw(leaderboardTop3);
 	window->draw(leaderboardBackToMenu);
 	window->display();
 
