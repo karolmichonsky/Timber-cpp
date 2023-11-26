@@ -26,6 +26,10 @@ int main(void) {
 				menu.updateMenu();
 				break;
 			case 0:
+				if (game.getLoseTimer() == 0.0f) {
+					game.resetGameStats();
+					menu.backToMenu();
+				}
 				game.update();
 				if (clock.getElapsedTime().asMilliseconds() > 2000 && game.getIsChopping() == 1) {
 					game.setIsChopping();
@@ -33,9 +37,6 @@ int main(void) {
 				}
 				game.lumberAnimation();
 				game.render();
-				if (game.getLoseTimer() == 0.0f) {
-					menu.backToMenu();
-				}
 				break;
 			case 2:
 				leaderboard.updateLeaderboard();

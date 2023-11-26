@@ -17,7 +17,6 @@ void Leaderboard::readLeaderboard()
 			initText(leaderboardTop1, leaderboardPoints, 100);
 			break;
 		case 1:
-			cout << leaderboardHelper << " " << leaderboardPoints << endl;
 			initText(leaderboardTop2, leaderboardPoints, 200);
 			break;
 		case 2:

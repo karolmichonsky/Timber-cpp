@@ -103,6 +103,13 @@ int Game::getGamePoints()
 	return points;
 }
 
+void Game::resetGameStats()
+{
+	gameOn = 0;
+	points = 0;
+	loseTimer = 500.f;
+}
+
 float Game::getLoseTimer()
 {
 	return loseTimer;
@@ -203,21 +210,29 @@ void Game::pollEvents()
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
 				if (this->helpLose[1] == 1) {
+					resetGameStats();
 					menu->backToMenu();
 				}
-				this->updatePoints();
-				this->treeHandle();
-				isChopping = 1;
-				isLeft = 1;
+				else {
+					this->updatePoints();
+					this->treeHandle();
+					isChopping = 1;
+					isLeft = 1;
+				}
+				
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
+					resetGameStats();
 					menu->backToMenu();
 				}
-				this->treeHandle();
-				this->updatePoints();
-				isChopping = 1;
-				isLeft = 0;
+				else {
+					this->treeHandle();
+					this->updatePoints();
+					isChopping = 1;
+					isLeft = 0;
+				}
+				
 			}
 			else if (event.key.code == sf::Keyboard::Escape) {
 				this->gameOn = 0;
@@ -265,12 +280,7 @@ void Game::gameUpdate()
 		}
 	}
 	if (gameOn == 1) {
-		if (this->loseTimer == 0) {
-			this->window->close();
-		}
-		else {
-			this->loseTimer -= 1.f;
-		}
+		this->loseTimer -= 1.f;
 	}
 	
 
@@ -284,14 +294,14 @@ void Game::render()
 	
 	this->renderTree();
 
-	this->initTimer();
-	this->window->draw(timer);
-
 	this->renderBranches();
 	
 	this->window->draw(text);
 
 	this->lumber();
+	
+	this->initTimer();
+	this->window->draw(timer);
 	
 	this->window->display();
 }

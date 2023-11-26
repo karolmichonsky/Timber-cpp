@@ -70,6 +70,7 @@ public:
 	void setIsChopping();
 	int getIsChopping();
 	int getGamePoints();
+	void resetGameStats();
 	float getLoseTimer();
 	void updatePoints();
 	void lumber();
