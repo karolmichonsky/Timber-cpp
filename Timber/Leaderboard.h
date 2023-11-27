@@ -17,6 +17,7 @@ class Leaderboard
 private:
 
     Game* game;
+	Menu* menu;
     sf::RenderWindow* window;
     sf::Event event;
 
@@ -24,6 +25,7 @@ private:
     sf::Text leaderboardTop2;
     sf::Text leaderboardTop3;
     sf::Text leaderboardBackToMenu;
+    sf::Text leaderboardText;
     sf::Font font;
     sf::Vector2f rect;
 
@@ -32,7 +34,7 @@ private:
     string leaderboardPoints;
 public:
 
-    Leaderboard(sf::RenderWindow* window, Game* game);
+    Leaderboard(sf::RenderWindow* window, Game* game, Menu* menu);
     void pollEvents();
     void initText(sf::Text &textVar, string textValue,int textHeight);
     void readLeaderboard();

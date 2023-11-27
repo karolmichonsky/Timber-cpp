@@ -1,6 +1,6 @@
 #include "Leaderboard.h"
 
-Leaderboard::Leaderboard(sf::RenderWindow* window, Game* game) : game(game)
+Leaderboard::Leaderboard(sf::RenderWindow* window, Game* game, Menu* menu) : game(game), menu(menu)
 {
 	this->window = window;
 }
@@ -13,18 +13,20 @@ void Leaderboard::readLeaderboard()
 	while (getline(leaderboardFileRead, leaderboardPoints)) {
 		switch (leaderboardHelper) {
 		case 0:
-			cout << leaderboardHelper << " " << leaderboardPoints << endl;
-			initText(leaderboardTop1, leaderboardPoints, 100);
+			initText(leaderboardTop1, leaderboardPoints, 200);
 			break;
 		case 1:
-			initText(leaderboardTop2, leaderboardPoints, 200);
+			initText(leaderboardTop2, leaderboardPoints, 300);
 			break;
 		case 2:
-			initText(leaderboardTop3, leaderboardPoints, 300);
+			initText(leaderboardTop3, leaderboardPoints, 400);
 			break;
 		}
 		leaderboardHelper++;
 	}
+	initText(leaderboardText, "Top 3 wyniki graczy", 100);
+	initText(leaderboardBackToMenu, "Powrot", 500);
+	leaderboardBackToMenu.setFillColor(sf::Color::Red);
 
 	leaderboardFileRead.close();
 }
@@ -49,12 +51,24 @@ void Leaderboard::saveLeaderboard()
 
 void Leaderboard::pollEvents()
 {
+	while (this->window->pollEvent(this->event)) {
+		if (this->event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::Enter) {
+				menu->backToMenu();
+			}
+			if (event.key.code == sf::Keyboard::Escape) {
+				menu->backToMenu();
+			}
+		}
+	}
 }
 
 void Leaderboard::updateLeaderboard()
 {
+	pollEvents();
 	readLeaderboard();
 	window->clear(sf::Color(85, 172, 238));
+	window->draw(leaderboardText);
 	window->draw(leaderboardTop1);
 	window->draw(leaderboardTop2);
 	window->draw(leaderboardTop3);
@@ -62,3 +76,5 @@ void Leaderboard::updateLeaderboard()
 	window->display();
 
 }
+
+
