@@ -26,8 +26,11 @@ int main(void) {
 				menu.updateMenu();
 				break;
 			case 0:
-				if (game.getLoseTimer() == 0.0f) {
+				if (game.getGameOn() == -1) {
 					game.resetGameStats();
+				}
+				if (game.getLoseTimer() == 0.0f) {
+					game.setGameOn(-1);
 					menu.backToMenu();
 				}
 				game.update();

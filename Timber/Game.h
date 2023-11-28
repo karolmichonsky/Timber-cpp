@@ -73,6 +73,8 @@ public:
 	void resetGameStats();
 	float getLoseTimer();
 	void updatePoints();
+	int getGameOn();
+	void setGameOn(int state);
 	void lumber();
 	void lumberAnimation();
 	void treeHandle();

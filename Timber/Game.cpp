@@ -125,6 +125,16 @@ void Game::updatePoints()
 	this->text.setString(stringPoints);
 }
 
+int Game::getGameOn()
+{
+	return gameOn;
+}
+
+void Game::setGameOn(int state)
+{
+	gameOn = state;
+}
+
 void Game::lumber()
 {
 	
@@ -210,7 +220,7 @@ void Game::pollEvents()
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
 				if (this->helpLose[1] == 1) {
-					resetGameStats();
+					gameOn = -1;
 					menu->backToMenu();
 				}
 				else {
@@ -223,7 +233,7 @@ void Game::pollEvents()
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
-					resetGameStats();
+					gameOn = -1;
 					menu->backToMenu();
 				}
 				else {
@@ -235,7 +245,8 @@ void Game::pollEvents()
 				
 			}
 			else if (event.key.code == sf::Keyboard::Escape) {
-				this->gameOn = 0;
+				gameOn = -1;
+				menu->backToMenu();
 			}
 		}
 	}
