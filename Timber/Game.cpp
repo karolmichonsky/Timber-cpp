@@ -220,8 +220,7 @@ void Game::pollEvents()
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::A) {
 				if (this->helpLose[1] == 1) {
-					gameOn = -1;
-					menu->backToMenu();
+					menu->setGameState(99);
 				}
 				else {
 					this->updatePoints();
@@ -233,8 +232,7 @@ void Game::pollEvents()
 			}
 			else if (event.key.code == sf::Keyboard::D) {
 				if (this->helpLose[1] == 2) {
-					gameOn = -1;
-					menu->backToMenu();
+					menu->setGameState(99);
 				}
 				else {
 					this->treeHandle();
@@ -245,8 +243,7 @@ void Game::pollEvents()
 				
 			}
 			else if (event.key.code == sf::Keyboard::Escape) {
-				gameOn = -1;
-				menu->backToMenu();
+				menu->setGameState(99);
 			}
 		}
 	}

@@ -90,10 +90,16 @@ int Menu::accessGameState()
 	return this->gameState;
 }
 
+void Menu::setGameState(int state)
+{
+	gameState = state;
+}
+
 void Menu::backToMenu()
 {
 	gameState = -1;
 }
+
 
 void Menu::updateMenu()
 {

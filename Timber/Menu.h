@@ -34,6 +34,7 @@ public:
 	void selectedMenu();
 	void pollEvents();
 	int accessGameState();
+	void setGameState(int state);
 	void backToMenu();
 	void updateMenu();
 };

@@ -9,7 +9,6 @@ void Leaderboard::readLeaderboard()
 {
 	
 	leaderboardFileRead.open("leaderboard.txt");
-	int leaderboardHelper = 0;
 	while (getline(leaderboardFileRead, leaderboardPoints)) {
 		switch (leaderboardHelper) {
 		case 0:
@@ -42,11 +41,37 @@ void Leaderboard::initText(sf::Text &textVar, string textValue, int textHeight)
 
 void Leaderboard::saveLeaderboard()
 {
-	leaderboardFileWrite.open("leaderboard.txt");
-	leaderboardFileWrite << game->getGamePoints();
-	leaderboardFileWrite << game->getGamePoints();
-	leaderboardFileWrite << game->getGamePoints();
-	leaderboardFileWrite.close();
+	checkRecord();
+	leaderboardFileRead.open("leaderboard.txt");
+	while (getline(leaderboardFileRead, leaderboardPoints)) {
+		leaderboardIntPoints = stoi(leaderboardPoints);
+		cout << leaderboardPlace << endl;
+		if (leaderboardPlace < 2) {
+			leaderboardNewTop.push_back(leaderboardIntPoints);
+		}
+		else if(leaderboardPlace == 2){
+			leaderboardNewTop.push_back(game->getGamePoints());
+		}
+		else {
+			leaderboardNewTop.push_back(tempPoints);
+		}
+		tempPoints = leaderboardIntPoints;
+		leaderboardPlace++;
+	}
+	leaderboardFileRead.close();
+	leaderboardPlace = 0;
+}
+
+void Leaderboard::checkRecord()
+{
+	leaderboardFileRead.open("leaderboard.txt");
+	while (getline(leaderboardFileRead, leaderboardPoints)) {
+		leaderboardIntPoints = stoi(leaderboardPoints);
+		if (game->getGamePoints() > leaderboardIntPoints) {
+			leaderboardPlace++;
+		}
+	}
+	leaderboardFileRead.close();
 }
 
 void Leaderboard::pollEvents()
@@ -74,7 +99,8 @@ void Leaderboard::updateLeaderboard()
 	window->draw(leaderboardTop3);
 	window->draw(leaderboardBackToMenu);
 	window->display();
-
 }
+
+
 
 

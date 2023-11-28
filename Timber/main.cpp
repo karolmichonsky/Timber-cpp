@@ -26,12 +26,8 @@ int main(void) {
 				menu.updateMenu();
 				break;
 			case 0:
-				if (game.getGameOn() == -1) {
-					game.resetGameStats();
-				}
 				if (game.getLoseTimer() == 0.0f) {
-					game.setGameOn(-1);
-					menu.backToMenu();
+					menu.setGameState(99);
 				}
 				game.update();
 				if (clock.getElapsedTime().asMilliseconds() > 2000 && game.getIsChopping() == 1) {
@@ -47,6 +43,10 @@ int main(void) {
 			case 3:
 				window.close();
 				break;
+			case 99:
+				game.resetGameStats();
+				leaderboard.saveLeaderboard();
+				menu.backToMenu();
 		}
 	}
 	return 0;

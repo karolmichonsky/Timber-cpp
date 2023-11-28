@@ -29,9 +29,16 @@ private:
     sf::Font font;
     sf::Vector2f rect;
 
+    vector<int> leaderboardNewTop;
+
     ofstream leaderboardFileWrite;
     ifstream leaderboardFileRead;
     string leaderboardPoints;
+
+    int leaderboardPlace;
+    int leaderboardIntPoints = 0;
+    int leaderboardHelper = 0;
+    int tempPoints;
 public:
 
     Leaderboard(sf::RenderWindow* window, Game* game, Menu* menu);
@@ -39,6 +46,7 @@ public:
     void initText(sf::Text &textVar, string textValue,int textHeight);
     void readLeaderboard();
     void saveLeaderboard();
+    void checkRecord();
 
     void updateLeaderboard();
 
