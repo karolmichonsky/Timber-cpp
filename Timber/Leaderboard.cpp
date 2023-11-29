@@ -28,6 +28,7 @@ void Leaderboard::readLeaderboard()
 	leaderboardBackToMenu.setFillColor(sf::Color::Red);
 
 	leaderboardFileRead.close();
+	leaderboardHelper = 0;
 }
 
 void Leaderboard::initText(sf::Text &textVar, string textValue, int textHeight)
@@ -45,7 +46,6 @@ void Leaderboard::saveLeaderboard()
 	leaderboardFileRead.open("leaderboard.txt");
 	while (getline(leaderboardFileRead, leaderboardPoints)) {
 		leaderboardIntPoints = stoi(leaderboardPoints);
-		cout << leaderboardPlace << endl;
 		if (leaderboardPlace < 3) {
 			leaderboardNewTop.push_back(leaderboardIntPoints);
 		}
