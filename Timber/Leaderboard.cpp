@@ -46,10 +46,10 @@ void Leaderboard::saveLeaderboard()
 	while (getline(leaderboardFileRead, leaderboardPoints)) {
 		leaderboardIntPoints = stoi(leaderboardPoints);
 		cout << leaderboardPlace << endl;
-		if (leaderboardPlace < 2) {
+		if (leaderboardPlace < 3) {
 			leaderboardNewTop.push_back(leaderboardIntPoints);
 		}
-		else if(leaderboardPlace == 2){
+		else if(leaderboardPlace == 3){
 			leaderboardNewTop.push_back(game->getGamePoints());
 		}
 		else {
@@ -59,6 +59,12 @@ void Leaderboard::saveLeaderboard()
 		leaderboardPlace++;
 	}
 	leaderboardFileRead.close();
+	leaderboardFileWrite.open("leaderboard.txt");
+	leaderboardFileWrite << leaderboardNewTop[0] << "\n";
+	leaderboardFileWrite << leaderboardNewTop[1] << "\n";
+	leaderboardFileWrite << leaderboardNewTop[2];
+	leaderboardFileWrite.close();
+	leaderboardNewTop.clear();
 	leaderboardPlace = 0;
 }
 

@@ -44,8 +44,8 @@ int main(void) {
 				window.close();
 				break;
 			case 99:
-				game.resetGameStats();
 				leaderboard.saveLeaderboard();
+				game.resetGameStats();
 				menu.backToMenu();
 		}
 	}
