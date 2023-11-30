@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Menu.h"
 #include "Leaderboard.h"
+#include "Theme.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -18,6 +19,7 @@ int main(void) {
 	Menu menu(&window);
 	Game game(&window, &menu);
 	Leaderboard leaderboard(&window, &game, &menu);
+	Theme theme(&game);
 	sf::Clock clock;
 
 	while (game.running()) {
@@ -36,6 +38,9 @@ int main(void) {
 				}
 				game.lumberAnimation();
 				game.render();
+				break;
+			case 1:
+
 				break;
 			case 2:
 				leaderboard.updateLeaderboard();

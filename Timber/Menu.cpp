@@ -18,7 +18,7 @@ void Menu::initText()
 	textLeaderboard.setFont(font);
 	textLeave.setFont(font);
 	this->textNewGame.setString("Nowa gra");
-	this->textStyle.setString("Zmien skorke");
+	this->textStyle.setString("Zmien motyw");
 	this->textLeaderboard.setString("Tabela wynikow");
 	this->textLeave.setString("Wyjdz z gry");
 	rect = textNewGame.getGlobalBounds().getSize();
