@@ -19,7 +19,7 @@ int main(void) {
 	Menu menu(&window);
 	Game game(&window, &menu);
 	Leaderboard leaderboard(&window, &game, &menu);
-	Theme theme(&game);
+	Theme theme(&window, &game);
 	sf::Clock clock;
 
 	while (game.running()) {
@@ -40,7 +40,7 @@ int main(void) {
 				game.render();
 				break;
 			case 1:
-
+				theme.mainStyle();
 				break;
 			case 2:
 				leaderboard.updateLeaderboard();
