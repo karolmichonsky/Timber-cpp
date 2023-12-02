@@ -26,7 +26,7 @@ private:
 	
 	int menuState = 0;
 	int gameState = -1;
-	void initText();
+	void initText(sf::Text& textVar, string textValue, int textHeight);
 public:
 	Menu(sf::RenderWindow* window);
 	virtual ~Menu();

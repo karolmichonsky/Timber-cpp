@@ -2,7 +2,10 @@
 
 Menu::Menu(sf::RenderWindow* window) {
 	this->window = window;
-	this->initText();
+	initText(textNewGame, "Nowa gra", 100);
+	initText(textStyle, "Zmien motyw", 200);
+	initText(textLeaderboard, "Tabela wynikow", 300);
+	initText(textLeave, "Wyjdz z gry", 400);
 }
 
 Menu::~Menu() {
@@ -10,25 +13,13 @@ Menu::~Menu() {
 }
 
 
-void Menu::initText()
+void Menu::initText(sf::Text& textVar, string textValue, int textHeight)
 {
-	this->font.loadFromFile("GAMERIA.ttf");
-	textNewGame.setFont(font);
-	textStyle.setFont(font);
-	textLeaderboard.setFont(font);
-	textLeave.setFont(font);
-	this->textNewGame.setString("Nowa gra");
-	this->textStyle.setString("Zmien motyw");
-	this->textLeaderboard.setString("Tabela wynikow");
-	this->textLeave.setString("Wyjdz z gry");
-	rect = textNewGame.getGlobalBounds().getSize();
-	textNewGame.setPosition(400 - rect.x / 2, 100);
-	rect = textStyle.getGlobalBounds().getSize();
-	textStyle.setPosition(400 - rect.x / 2, 200);
-	rect = textLeaderboard.getGlobalBounds().getSize();
-	textLeaderboard.setPosition(400 - rect.x / 2, 300);
-	rect = textLeave.getGlobalBounds().getSize();
-	textLeave.setPosition(400 - rect.x / 2, 400);
+	font.loadFromFile("GAMERIA.ttf");
+	textVar.setFont(font);
+	textVar.setString(textValue);
+	rect = textVar.getGlobalBounds().getSize();
+	textVar.setPosition(400 - rect.x / 2, textHeight);
 }
 
 
