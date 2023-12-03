@@ -1,6 +1,6 @@
 #include "Theme.h"
 
-Theme::Theme(sf::RenderWindow* window, Game* game)
+Theme::Theme(sf::RenderWindow* window, Game* game, Menu* menu)
 {
 
 	this->window = window;
@@ -9,6 +9,45 @@ Theme::Theme(sf::RenderWindow* window, Game* game)
 	initCheckBox(styleHell, 450, sf::Color(255, 127, 80));
 	initCheckBox(styleVoid, 600, sf::Color(138, 43, 226));
 	initBack();
+}
+
+void Theme::pollEvents()
+{
+	while (this->window->pollEvent(this->event)) {
+		if (this->event.type == sf::Event::Closed) {
+			this->window->close();
+		}
+		if (this->event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::D) {
+				checkboxPos++;
+				if (checkboxPos > 3) {
+					checkboxPos = 0;
+				}
+			}
+			if (event.key.code == sf::Keyboard::A) {
+				checkboxPos--;
+				if (checkboxPos < 0) {
+					checkboxPos = 3;
+				}
+			}
+			if (event.key.code == sf::Keyboard::W) {
+				themeMenuPos++;
+				if (themeMenuPos > 1) {
+					themeMenuPos = 0;
+				}
+			}
+			if (event.key.code == sf::Keyboard::S) {
+				themeMenuPos--;
+				if (themeMenuPos < 0) {
+					themeMenuPos = 1;
+				}
+			}
+			
+			else if (event.key.code == sf::Keyboard::Escape) {
+				menu->backToMenu();
+			}
+		}
+	}
 }
 
 void Theme::initCheckBox(sf::RectangleShape& box, int boxXPos, sf::Color boxColor)
@@ -31,6 +70,7 @@ void Theme::initBack()
 
 void Theme::mainStyle()
 {
+	pollEvents();
 	window->clear(sf::Color(85, 172, 238));
 	window->draw(styleClassic);
 	window->draw(styleWinter);

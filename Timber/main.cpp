@@ -19,7 +19,7 @@ int main(void) {
 	Menu menu(&window);
 	Game game(&window, &menu);
 	Leaderboard leaderboard(&window, &game, &menu);
-	Theme theme(&window, &game);
+	Theme theme(&window, &game, &menu);
 	sf::Clock clock;
 
 	while (game.running()) {

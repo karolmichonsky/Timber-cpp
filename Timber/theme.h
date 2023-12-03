@@ -11,6 +11,7 @@ private:
 	sf::Event event;
 
 	Game* game;
+	Menu* menu;
 
 	sf::RectangleShape styleClassic;
 	sf::RectangleShape styleWinter;
@@ -20,8 +21,13 @@ private:
 	sf::Text textBack;
 	sf::Font font;
 	sf::Vector2f rect;
+	
+	int checkboxPos;
+	int themeMenuPos;
 public:
-	Theme(sf::RenderWindow* window, Game* game);
+	Theme(sf::RenderWindow* window, Game* game, Menu* menu);
+
+	void pollEvents();
 
 	void initCheckBox(sf::RectangleShape& box, int boxXPos, sf::Color boxColor);
 	void initBack();
