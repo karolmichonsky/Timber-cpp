@@ -16,10 +16,15 @@ private:
 	sf::RectangleShape styleWinter;
 	sf::RectangleShape styleHell;
 	sf::RectangleShape styleVoid;
+
+	sf::Text textBack;
+	sf::Font font;
+	sf::Vector2f rect;
 public:
 	Theme(sf::RenderWindow* window, Game* game);
 
-	void initCheckBox(sf::RectangleShape* box, int boxXPos);
+	void initCheckBox(sf::RectangleShape& box, int boxXPos, sf::Color boxColor);
+	void initBack();
 	void mainStyle();
 };
 
