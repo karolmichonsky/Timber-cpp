@@ -80,6 +80,7 @@ public:
 	void treeHandle();
 	void timeHandle();
 	void spawnBranches();
+	void resetTree();
 	void spawnTree();
 	void pollEvents();
 	void update();

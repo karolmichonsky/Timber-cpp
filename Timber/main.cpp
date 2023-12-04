@@ -51,6 +51,7 @@ int main(void) {
 			case 99:
 				leaderboard.saveLeaderboard();
 				game.resetGameStats();
+				game.resetTree();
 				menu.backToMenu();
 		}
 	}

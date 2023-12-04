@@ -205,6 +205,14 @@ void Game::spawnBranches()
 	}
 }
 
+void Game::resetTree()
+{
+	trees.clear();
+	branches.clear();
+	helpBranches.clear();
+	helpLose.clear();
+}
+
 void Game::spawnTree()
 {
 	this->trees.push_back(this->tree);
