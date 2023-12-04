@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include "Menu.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -7,11 +8,12 @@
 class Theme
 {
 private:
+	Game* game;
+	Menu* menu;
+
 	sf::RenderWindow* window;
 	sf::Event event;
 
-	Game* game;
-	Menu* menu;
 
 	sf::RectangleShape styleClassic;
 	sf::RectangleShape styleWinter;

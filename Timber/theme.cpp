@@ -1,6 +1,6 @@
 #include "Theme.h"
 
-Theme::Theme(sf::RenderWindow* window, Game* game, Menu* menu)
+Theme::Theme(sf::RenderWindow* window, Game* game, Menu* menu) : menu(menu)
 {
 
 	this->window = window;
@@ -43,7 +43,7 @@ void Theme::pollEvents()
 				}
 			}
 			
-			else if (event.key.code == sf::Keyboard::Escape) {
+			if (event.key.code == sf::Keyboard::Escape) {
 				menu->backToMenu();
 			}
 		}
