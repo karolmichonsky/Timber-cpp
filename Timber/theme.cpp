@@ -9,6 +9,10 @@ Theme::Theme(sf::RenderWindow* window, Game* game, Menu* menu) : menu(menu)
 	initCheckBox(styleHell, 450, sf::Color(255, 127, 80));
 	initCheckBox(styleVoid, 600, sf::Color(138, 43, 226));
 	initBack();
+	helpStyle.push_back(styleClassic);
+	helpStyle.push_back(styleWinter);
+	helpStyle.push_back(styleHell);
+	helpStyle.push_back(styleVoid);
 }
 
 void Theme::pollEvents()
@@ -18,35 +22,58 @@ void Theme::pollEvents()
 			this->window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::D) {
-				checkboxPos++;
-				if (checkboxPos > 3) {
-					checkboxPos = 0;
+			if (themeMenuPos == 0) {
+				if (event.key.code == sf::Keyboard::D) {
+					checkboxPos += 1;
+					if (checkboxPos > 3) {
+						checkboxPos = 0;
+					}
+				}
+				if (event.key.code == sf::Keyboard::A) {
+					checkboxPos -= 1;
+					if (checkboxPos < 0) {
+						checkboxPos = 3;
+					}
 				}
 			}
-			if (event.key.code == sf::Keyboard::A) {
-				checkboxPos--;
-				if (checkboxPos < 0) {
-					checkboxPos = 3;
-				}
-			}
-			if (event.key.code == sf::Keyboard::W) {
-				themeMenuPos++;
+			
+			if (event.key.code == sf::Keyboard::S) {
+				themeMenuPos += 1;
 				if (themeMenuPos > 1) {
 					themeMenuPos = 0;
 				}
 			}
-			if (event.key.code == sf::Keyboard::S) {
-				themeMenuPos--;
+			if (event.key.code == sf::Keyboard::W) {
+				themeMenuPos -= 1;
 				if (themeMenuPos < 0) {
 					themeMenuPos = 1;
 				}
 			}
-			
 			if (event.key.code == sf::Keyboard::Escape) {
 				menu->backToMenu();
+				themeMenuPos = 0;
+				checkboxPos = 0;
 			}
 		}
+	}
+}
+
+void Theme::currentCheckBox()
+{
+	
+	if (themeMenuPos == 0) {
+		helpStyle[0].setOutlineColor(sf::Color(220, 220, 220));
+		helpStyle[1].setOutlineColor(sf::Color(220, 220, 220));
+		helpStyle[2].setOutlineColor(sf::Color(220, 220, 220));
+		helpStyle[3].setOutlineColor(sf::Color(220, 220, 220));	
+		helpStyle[checkboxPos].setOutlineColor(sf::Color::Red);
+	}
+	if (themeMenuPos == 1) {
+		textBack.setFillColor(sf::Color::Red);
+		helpStyle[checkboxPos].setOutlineColor(sf::Color(220, 220, 220));
+	}
+	else {
+		textBack.setFillColor(sf::Color::White);
 	}
 }
 
@@ -70,12 +97,13 @@ void Theme::initBack()
 
 void Theme::mainStyle()
 {
+	
 	pollEvents();
 	window->clear(sf::Color(85, 172, 238));
-	window->draw(styleClassic);
-	window->draw(styleWinter);
-	window->draw(styleHell);
-	window->draw(styleVoid);
+	currentCheckBox();
+	for (auto& e : helpStyle) {
+		window->draw(e);
+	}
 	window->draw(textBack);
 	window->display();
 }
