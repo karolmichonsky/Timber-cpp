@@ -304,7 +304,7 @@ void Game::gameUpdate()
 
 void Game::render()
 {
-	this->window->clear(sf::Color(85,172,238));
+	this->window->clear(background);
 	
 	this->window->draw(floor);
 	
@@ -334,4 +334,13 @@ void Game::renderBranches()
 	for (auto& e : this->branches) {
 		this->window->draw(e);
 	}
+}
+
+void Game::setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground)
+{
+	branchLeft.setFillColor(styleTree);
+	branchRight.setFillColor(styleTree);
+	floor.setFillColor(styleFloor);
+	tree.setFillColor(styleTree);
+	background = styleBackground;
 }

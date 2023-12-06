@@ -1,12 +1,12 @@
 #include "Theme.h"
 
-Theme::Theme(sf::RenderWindow* window, Game* game, Menu* menu) : menu(menu)
+Theme::Theme(sf::RenderWindow* window, Game* game, Menu* menu) : menu(menu), game(game)
 {
 
 	this->window = window;
-	initCheckBox(styleClassic, 150, sf::Color(0, 255, 127));
+	initCheckBox(styleClassic, 150, sf::Color(0, 64, 0));
 	initCheckBox(styleWinter, 300, sf::Color(255, 250, 250));
-	initCheckBox(styleHell, 450, sf::Color(255, 127, 80));
+	initCheckBox(styleHell, 450, sf::Color(125, 14, 14));
 	initCheckBox(styleVoid, 600, sf::Color(138, 43, 226));
 	initBack();
 	helpStyle.push_back(styleClassic);
@@ -34,6 +34,9 @@ void Theme::pollEvents()
 					if (checkboxPos < 0) {
 						checkboxPos = 3;
 					}
+				}
+				if (event.key.code == sf::Keyboard::Enter) {
+					changeStyle();
 				}
 			}
 			
@@ -74,6 +77,24 @@ void Theme::currentCheckBox()
 	}
 	else {
 		textBack.setFillColor(sf::Color::White);
+	}
+}
+
+void Theme::changeStyle()
+{
+	switch (checkboxPos) {
+	case 0:
+		game->setStyle(sf::Color(55, 29, 16), sf::Color(0, 64, 0), sf::Color(85, 172, 238));
+		break;
+	case 1:
+		game->setStyle(sf::Color(20, 13, 7), sf::Color(255, 250, 250), sf::Color(48, 96, 133));
+		break;
+	case 2:
+		game->setStyle(sf::Color(42, 0, 0), sf::Color(125, 14, 14), sf::Color(255, 76, 0));
+		break;
+	case 3:
+		game->setStyle(sf::Color(75, 0, 130), sf::Color(138, 43, 226), sf::Color(0, 0, 0));
+		break;
 	}
 }
 

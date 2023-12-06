@@ -47,6 +47,7 @@ private:
 	sf::RectangleShape branchHollow;
 	sf::RectangleShape tree;
 	sf::RectangleShape floor;
+	sf::Color background = sf::Color(85, 172, 238);
 	sf::Texture textureLumberAway;
 	sf::Sprite spriteLumberAway;
 	sf::Texture textureLumberAction;
@@ -88,5 +89,7 @@ public:
 	void render();
 	void renderTree();
 	void renderBranches();
+
+	void setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground);
 };
 

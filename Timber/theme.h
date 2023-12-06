@@ -34,6 +34,7 @@ public:
 
 	void currentCheckBox();
 	void initCheckBox(sf::RectangleShape& box, int boxXPos, sf::Color boxColor);
+	void changeStyle();
 	void initBack();
 	void mainStyle();
 };
