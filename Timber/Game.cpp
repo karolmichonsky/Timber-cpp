@@ -108,6 +108,7 @@ void Game::resetGameStats()
 	gameOn = 0;
 	points = 0;
 	loseTimer = 500.f;
+	initText();
 }
 
 float Game::getLoseTimer()

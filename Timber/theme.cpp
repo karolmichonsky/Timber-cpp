@@ -52,7 +52,7 @@ void Theme::pollEvents()
 					themeMenuPos = 1;
 				}
 			}
-			if (event.key.code == sf::Keyboard::Escape) {
+			if (event.key.code == sf::Keyboard::Enter && themeMenuPos == 1 || event.key.code == sf::Keyboard::Escape) {
 				menu->backToMenu();
 				themeMenuPos = 0;
 				checkboxPos = 0;
