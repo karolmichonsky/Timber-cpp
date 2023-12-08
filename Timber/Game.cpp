@@ -53,7 +53,7 @@ void Game::initBranchesRight()
 
 void Game::initBranchesHollow()
 {
-	this->branchLeft.setSize(sf::Vector2f(0.f, 0.f));
+	this->branchHollow.setSize(sf::Vector2f(0.f, 0.f));
 }
 
 void Game::initTimer()
@@ -64,6 +64,26 @@ void Game::initTimer()
 	this->timer.setOutlineColor(sf::Color(69,69,69));
 	this->timer.setOutlineThickness(5.f);
 
+}
+
+void Game::initPauseResume()
+{
+	font.loadFromFile("GAMERIA.ttf");
+	pauseResume.setFont(font);
+	pauseResume.setString("A  Graj  D");
+	pauseResume.setPosition(400 - pauseResume.getGlobalBounds().getSize().x / 2, 200);
+	pauseResume.setOutlineColor(sf::Color::Black);
+	pauseResume.setOutlineThickness(2);
+}
+
+void Game::initPauseEscape()
+{
+	font.loadFromFile("GAMERIA.ttf");
+	pauseEscape.setFont(font);
+	pauseEscape.setString("Escape   Menu");
+	pauseEscape.setPosition(400 - pauseEscape.getGlobalBounds().getSize().x / 2, 300);
+	pauseEscape.setOutlineColor(sf::Color::Black);
+	pauseEscape.setOutlineThickness(2);
 }
 
 Game::Game(sf::RenderWindow* window, Menu* menu) : window(window), menu(menu) {
@@ -77,6 +97,8 @@ Game::Game(sf::RenderWindow* window, Menu* menu) : window(window), menu(menu) {
 	this->initBranchesHollow();
 	this->initBranchesLeft();
 	this->initBranchesRight();
+	initPauseEscape();
+	initPauseResume();
 }
 
 Game::~Game() {
@@ -251,8 +273,12 @@ void Game::pollEvents()
 				}
 				
 			}
-			else if (event.key.code == sf::Keyboard::Escape) {
-				menu->setGameState(99);
+			else if (event.key.code == sf::Keyboard::Escape) {	
+				if (gameOn == 0)
+				{
+					menu->setGameState(99);
+				}
+				gameOn = 0;
 			}
 		}
 	}
@@ -299,7 +325,6 @@ void Game::gameUpdate()
 	if (gameOn == 1) {
 		this->loseTimer -= 1.f;
 	}
-	
 
 }
 
@@ -319,6 +344,11 @@ void Game::render()
 	
 	this->initTimer();
 	this->window->draw(timer);
+
+	if (gameOn == 0) {
+		window->draw(pauseEscape);
+		window->draw(pauseResume);
+	}
 	
 	this->window->display();
 }

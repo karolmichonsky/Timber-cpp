@@ -35,6 +35,8 @@ private:
 
 	sf::Font font;
 	sf::Text text;
+	sf::Text pauseResume;
+	sf::Text pauseEscape;
 
 	vector<sf::RectangleShape> trees;
 	vector<int> helpBranches;
@@ -61,6 +63,8 @@ private:
 	void initBranchesRight();
 	void initBranchesHollow();
 	void initTimer();
+	void initPauseResume();
+	void initPauseEscape();
 public:
 	//Konstruktor i destruktor
 	Game(sf::RenderWindow* window, Menu* menu);
