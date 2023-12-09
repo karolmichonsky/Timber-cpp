@@ -72,6 +72,9 @@ void Menu::pollEvents()
 			if (event.key.code == sf::Keyboard::Enter) {
 				gameState = menuState;
 			}
+			if (event.key.code == sf::Keyboard::Escape) {
+				window->close();
+			}
 		}
 	}
 }
