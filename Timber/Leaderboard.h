@@ -29,6 +29,35 @@ private:
     sf::Font font;
     sf::Vector2f rect;
 
+
+	sf::Text nQ;
+	sf::Text nW;
+	sf::Text nE;
+	sf::Text nR;
+	sf::Text nT;
+	sf::Text nY;
+	sf::Text nU;
+	sf::Text nI;
+	sf::Text nO;
+	sf::Text nP;
+	sf::Text nA;
+	sf::Text nS;
+	sf::Text nD;
+	sf::Text nF;
+	sf::Text nG;
+	sf::Text nH;
+	sf::Text nJ;
+	sf::Text nK;
+	sf::Text nL;
+	sf::Text nZ;
+	sf::Text nX;
+	sf::Text nC;
+	sf::Text nV;
+	sf::Text nB;
+	sf::Text nN;
+	sf::Text nM;
+	vector<sf::Text> nicknameLetters;
+
     vector<int> leaderboardNewTop;
 
     ofstream leaderboardFileWrite;
@@ -39,11 +68,12 @@ private:
     int leaderboardIntPoints = 0;
     int leaderboardHelper = 0;
     int tempPoints;
+	void initNickname(sf::Text& nicknameVar, string nicknameLetter, int nicknameWidth, int nicknameHeight);
+	void initText(sf::Text& textVar, string textValue, int textHeight);
 public:
 
     Leaderboard(sf::RenderWindow* window, Game* game, Menu* menu);
     void pollEvents();
-    void initText(sf::Text &textVar, string textValue,int textHeight);
     void readLeaderboard();
     void saveLeaderboard();
     void checkRecord();

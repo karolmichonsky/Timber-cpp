@@ -22,8 +22,6 @@ void Menu::initText(sf::Text& textVar, string textValue, int textHeight)
 	textVar.setPosition(400 - rect.x / 2, textHeight);
 }
 
-
-
 void Menu::selectedMenu()
 {
 	switch (menuState) {
