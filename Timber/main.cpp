@@ -28,16 +28,21 @@ int main(void) {
 				menu.updateMenu();
 				break;
 			case 0:
-				if (game.getLoseTimer() == 0.0f) {
-					menu.setGameState(99);
+				if (leaderboard.getNicknameGame()==""){
+					leaderboard.updateNickname();
 				}
-				game.update();
-				if (clock.getElapsedTime().asMilliseconds() > 2000 && game.getIsChopping() == 1) {
-					game.setIsChopping();
-					clock.restart();
-				}
-				game.lumberAnimation();
-				game.render();
+				else {
+					if (game.getLoseTimer() == 0.0f) {
+						menu.setGameState(99);
+					}
+					game.update();
+					if (clock.getElapsedTime().asMilliseconds() > 2000 && game.getIsChopping() == 1) {
+						game.setIsChopping();
+						clock.restart();
+					}
+					game.lumberAnimation();
+					game.render();
+					}
 				break;
 			case 1:
 				theme.mainStyle();

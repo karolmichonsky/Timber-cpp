@@ -29,7 +29,8 @@ private:
     sf::Font font;
     sf::Vector2f rect;
 
-
+	sf::Text nText;
+	sf::Text nNickname;
 	sf::Text nQ;
 	sf::Text nW;
 	sf::Text nE;
@@ -56,7 +57,12 @@ private:
 	sf::Text nB;
 	sf::Text nN;
 	sf::Text nM;
+	sf::Text nDel;
 	vector<sf::Text> nicknameLetters;
+	sf::Text back;
+
+	string nicknameWIP;
+	string nicknameGame;
 
     vector<int> leaderboardNewTop;
 
@@ -77,7 +83,9 @@ public:
     void readLeaderboard();
     void saveLeaderboard();
     void checkRecord();
+	string getNicknameGame();
 
+	void updateNickname();
     void updateLeaderboard();
 
 };

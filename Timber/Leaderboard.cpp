@@ -3,34 +3,37 @@
 Leaderboard::Leaderboard(sf::RenderWindow* window, Game* game, Menu* menu) : game(game), menu(menu)
 {
 	this->window = window;
-	initNickname(nQ, "Q", 175, 300);
-	initNickname(nW, "W", 225, 300);
-	initNickname(nE, "E", 275, 300);
-	initNickname(nR, "R", 325, 300);
-	initNickname(nT, "T", 375, 300);
-	initNickname(nY, "Y", 425, 300);
-	initNickname(nU, "U", 475, 300);
-	initNickname(nI, "I", 525, 300);
-	initNickname(nO, "O", 575, 300);
-	initNickname(nP, "P", 625, 300);
-	initNickname(nA, "A", 200, 400);
-	initNickname(nS, "S", 250, 400);
-	initNickname(nD, "D", 300, 400);
-	initNickname(nF, "F", 350, 400);
-	initNickname(nG, "G", 400, 400);
-	initNickname(nH, "H", 450, 400);
-	initNickname(nJ, "K", 500, 400);
-	initNickname(nK, "K", 550, 400);
-	initNickname(nL, "L", 600, 400);
-	initNickname(nZ, "Z", 250, 500);
-	initNickname(nX, "X", 300, 500);
-	initNickname(nC, "C", 350, 500);
-	initNickname(nV, "V", 400, 500);
-	initNickname(nB, "B", 450, 500);
-	initNickname(nN, "N", 500, 500);
-	initNickname(nM, "M", 550, 500);
-	nicknameLetters.insert(nicknameLetters.end(), { nQ,nW,nE,nR,nT,nY,nU,nI,nO,nP,nA,nS,nD,
-												   nF,nG,nH,nJ,nK,nL,nZ,nX,nC,nV,nB,nN,nM });
+	initNickname(nText, "Podaj nick na obecna sesje", 400, 50);
+	initNickname(nQ, "Q", 175, 200);
+	initNickname(nW, "W", 225, 200);
+	initNickname(nE, "E", 275, 200);
+	initNickname(nR, "R", 325, 200);
+	initNickname(nT, "T", 375, 200);
+	initNickname(nY, "Y", 425, 200);
+	initNickname(nU, "U", 475, 200);
+	initNickname(nI, "I", 525, 200);
+	initNickname(nO, "O", 575, 200);
+	initNickname(nP, "P", 625, 200);
+	initNickname(nA, "A", 200, 300);
+	initNickname(nS, "S", 250, 300);
+	initNickname(nD, "D", 300, 300);
+	initNickname(nF, "F", 350, 300);
+	initNickname(nG, "G", 400, 300);
+	initNickname(nH, "H", 450, 300);
+	initNickname(nJ, "J", 500, 300);
+	initNickname(nK, "K", 550, 300);
+	initNickname(nL, "L", 600, 300);
+	initNickname(nZ, "Z", 225, 400);
+	initNickname(nX, "X", 275, 400);
+	initNickname(nC, "C", 325, 400);
+	initNickname(nV, "V", 375, 400);
+	initNickname(nB, "B", 425, 400);
+	initNickname(nN, "N", 475, 400);
+	initNickname(nM, "M", 525, 400);
+	initNickname(nDel, "<", 575, 400);
+	initNickname(back, "Zapisz nick", 400, 500);
+	nicknameLetters.insert(nicknameLetters.end(), { nQ,nW,nE,nR,nT,nY,nU,nI,nO,nP,nA,nS,nD,nF,nG
+												   ,nH,nJ,nK,nL,nZ,nX,nC,nV,nB,nN,nM,nDel,back });
 }
 
 void Leaderboard::readLeaderboard()
@@ -66,6 +69,24 @@ void Leaderboard::initText(sf::Text &textVar, string textValue, int textHeight)
 	textVar.setString(textValue);
 	rect = textVar.getGlobalBounds().getSize();
 	textVar.setPosition(400 - rect.x / 2, textHeight);
+}
+
+string Leaderboard::getNicknameGame()
+{
+	return nicknameGame;
+}
+
+void Leaderboard::updateNickname()
+{
+	window->clear(sf::Color(85, 172, 238));
+	window->draw(nText);
+	nicknameWIP = "lorem";
+	initNickname(nNickname, nicknameWIP, 400, 150);
+	window->draw(nNickname);
+	for (auto& e : nicknameLetters) {
+		window->draw(e);
+	}
+	window->display();
 }
 
 void Leaderboard::initNickname(sf::Text& nicknameVar, string nicknameLetter, int nicknameWidth, int nicknameHeight)
