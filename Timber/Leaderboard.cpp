@@ -81,7 +81,6 @@ void Leaderboard::updateNickname()
 	pollEventsNickname();
 	window->clear(sf::Color(85, 172, 238));
 	window->draw(nText);
-	nicknameWIP = "lorem";
 	initNickname(nNickname, nicknameWIP, 400, 150);
 	window->draw(nNickname);
 	for (auto& e : nicknameLetters) {
@@ -89,7 +88,6 @@ void Leaderboard::updateNickname()
 		nicknameLetters[nicknamePos].setFillColor(sf::Color::Red);
 		window->draw(e);
 	}
-	cout << nicknamePos;
 	window->display();
 }
 
@@ -248,6 +246,17 @@ void Leaderboard::pollEventsNickname()
 				}
 				else {
 					nicknamePos--;
+				}
+			}
+			if (event.key.code == sf::Keyboard::Enter) {
+				if (nicknamePos < 26) {
+					nicknameWIP += nicknameLetters[nicknamePos].getString();
+				}
+				if (nicknamePos == 26) {
+					nicknameWIP.pop_back();
+				}
+				if (nicknamePos == 27) {
+					nicknameGame = nicknameWIP;
 				}
 			}
 			if (event.key.code == sf::Keyboard::Escape) {
