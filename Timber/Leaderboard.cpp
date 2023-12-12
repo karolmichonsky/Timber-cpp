@@ -78,14 +78,18 @@ string Leaderboard::getNicknameGame()
 
 void Leaderboard::updateNickname()
 {
+	pollEventsNickname();
 	window->clear(sf::Color(85, 172, 238));
 	window->draw(nText);
 	nicknameWIP = "lorem";
 	initNickname(nNickname, nicknameWIP, 400, 150);
 	window->draw(nNickname);
 	for (auto& e : nicknameLetters) {
+		e.setFillColor(sf::Color::White);
+		nicknameLetters[nicknamePos].setFillColor(sf::Color::Red);
 		window->draw(e);
 	}
+	cout << nicknamePos;
 	window->display();
 }
 
@@ -142,9 +146,109 @@ void Leaderboard::checkRecord()
 void Leaderboard::pollEvents()
 {
 	while (this->window->pollEvent(this->event)) {
+		if (this->event.type == sf::Event::Closed) {
+			this->window->close();
+		}
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (event.key.code == sf::Keyboard::Enter) {
 				menu->backToMenu();
+			}
+			if (event.key.code == sf::Keyboard::Escape) {
+				menu->backToMenu();
+			}
+		}
+	}
+}
+
+void Leaderboard::pollEventsNickname()
+{
+	while (this->window->pollEvent(this->event)) {
+		if (this->event.type == sf::Event::Closed) {
+			this->window->close();
+		}
+		if (this->event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::S) {
+				if (nicknamePos < 9) {
+					nicknamePosBefore = nicknamePos;
+					nicknamePos += 10;
+				}
+				else if (nicknamePos == 9) {
+					nicknamePos = 18;
+				}
+				else if (nicknamePos < 18 && nicknamePos > 9) {
+					nicknamePos += 9;
+				}
+				else if (nicknamePos == 18) {
+					nicknamePos = 26;
+				}
+				else if (nicknamePos > 18 && nicknamePos < 27) {
+					nicknamePosBefore = nicknamePos;
+					nicknamePos = 27;
+				}
+				else if (nicknamePos == 27) {
+					if (nicknamePosBefore > 18) {
+						nicknamePosBefore = nicknamePosBefore - 18;
+					}
+					nicknamePos = nicknamePosBefore;
+				}
+			}
+			if (event.key.code == sf::Keyboard::D) {
+				if (nicknamePos == 9) {
+					nicknamePos = 0;
+				}
+				else if (nicknamePos == 18) {
+					nicknamePos = 10;
+				}
+				else if (nicknamePos == 26) {
+					nicknamePos = 19;
+				}
+				else if (nicknamePos == 27) {
+					nicknamePos = 27;
+				}
+				else {
+					nicknamePos++; 
+				}
+			}
+			if (event.key.code == sf::Keyboard::W) {
+				if (nicknamePos <= 9) {
+					nicknamePosBefore = nicknamePos;
+					nicknamePos = 27;
+				}
+				else if (nicknamePos < 19 && nicknamePos > 9) {
+					nicknamePos -= 10;
+				}
+				else if (nicknamePos > 1 && nicknamePos < 27) {
+					nicknamePos -= 9;
+				}
+				else if (nicknamePos == 27) {
+					if (nicknamePosBefore == 9) {
+						nicknamePosBefore = nicknamePosBefore + 17;
+					}
+					if (nicknamePosBefore == 0) {
+						nicknamePosBefore = nicknamePosBefore + 26;
+					}
+					if (nicknamePosBefore < 19) {
+						nicknamePosBefore = nicknamePosBefore + 18;
+					}
+					nicknamePos = nicknamePosBefore;	
+				}
+			}
+			if (event.key.code == sf::Keyboard::A) {
+				if (nicknamePos == 0) {
+					nicknamePos = 9;
+				}
+				else if (nicknamePos == 10) {
+					nicknamePos = 18;
+				}
+				else if (nicknamePos == 19) {
+					nicknamePos = 26;
+				}
+				else if (nicknamePos == 27) {
+					nicknamePos = 27;
+				}
+				else {
+					nicknamePos--;
+				}
 			}
 			if (event.key.code == sf::Keyboard::Escape) {
 				menu->backToMenu();

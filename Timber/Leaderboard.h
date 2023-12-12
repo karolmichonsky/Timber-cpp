@@ -61,6 +61,8 @@ private:
 	vector<sf::Text> nicknameLetters;
 	sf::Text back;
 
+	int nicknamePos;
+	int nicknamePosBefore;
 	string nicknameWIP;
 	string nicknameGame;
 
@@ -80,6 +82,7 @@ public:
 
     Leaderboard(sf::RenderWindow* window, Game* game, Menu* menu);
     void pollEvents();
+	void pollEventsNickname();
     void readLeaderboard();
     void saveLeaderboard();
     void checkRecord();
