@@ -323,7 +323,12 @@ void Game::gameUpdate()
 		}
 	}
 	if (gameOn == 1) {
-		this->loseTimer -= 1.f;
+		float loseProg = points / 60;
+		if (loseProg > 3) {
+			loseProg = 3;
+		}
+		cout<< 1.f + loseProg;
+
 	}
 
 }

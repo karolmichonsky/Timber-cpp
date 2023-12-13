@@ -32,7 +32,7 @@ int main(void) {
 					leaderboard.updateNickname();
 				}
 				else {
-					if (game.getLoseTimer() == 0.0f) {
+					if (game.getLoseTimer() < 0.0f) {
 						menu.setGameState(99);
 					}
 					game.update();
