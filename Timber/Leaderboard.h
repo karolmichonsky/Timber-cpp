@@ -67,16 +67,19 @@ private:
 	string nicknameGame;
 
     vector<int> leaderboardNewTop;
+	vector<string> leaderboardNewTopNickname;
 
     ofstream leaderboardFileWrite;
     ifstream leaderboardFileRead;
     string leaderboardLine;
+	string leaderboardNickname;
 	string leaderboardPoints;
 
     int leaderboardPlace;
     int leaderboardIntPoints = 0;
     int leaderboardHelper = 0;
     int tempPoints;
+	string tempNickname;
 	void initNickname(sf::Text& nicknameVar, string nicknameLetter, int nicknameWidth, int nicknameHeight);
 	void initText(sf::Text& textVar, string textValue, int textHeight);
 public:

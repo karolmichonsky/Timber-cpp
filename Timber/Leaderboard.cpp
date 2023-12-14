@@ -107,30 +107,41 @@ void Leaderboard::saveLeaderboard()
 	leaderboardFileRead.open("leaderboard.txt");
 	while (getline(leaderboardFileRead, leaderboardLine)) {
 		leaderboardPoints = "";
+		leaderboardNickname = "";
 		for (int i = 0; i < leaderboardLine.size(); i++) {
 			if (isdigit(leaderboardLine[i])) {
 				leaderboardPoints += leaderboardLine[i];
+			}
+			else {
+				if (!isblank(leaderboardLine[i])) {
+					leaderboardNickname += leaderboardLine[i];
+				}
 			}
 		}
 		leaderboardIntPoints = stoi(leaderboardPoints);
 		
 		if (leaderboardPlace < 3) {
 			leaderboardNewTop.push_back(leaderboardIntPoints);
+			leaderboardNewTopNickname.push_back(leaderboardNickname);
 		}
 		else if(leaderboardPlace == 3){
 			leaderboardNewTop.push_back(game->getGamePoints());
+			leaderboardNewTopNickname.push_back(nicknameGame);
 		}
 		else {
 			leaderboardNewTop.push_back(tempPoints);
+			leaderboardNewTopNickname.push_back(tempNickname);
 		}
 		tempPoints = leaderboardIntPoints;
+		tempNickname = leaderboardNickname;
 		leaderboardPlace++;
 	}
+	
 	leaderboardFileRead.close();
 	leaderboardFileWrite.open("leaderboard.txt");
-	leaderboardFileWrite << leaderboardNewTop[0] << "\n";
-	leaderboardFileWrite << leaderboardNewTop[1] << "\n";
-	leaderboardFileWrite << leaderboardNewTop[2];
+	leaderboardFileWrite << leaderboardNewTop[0] << " " << leaderboardNewTopNickname[0] << "\n";
+	leaderboardFileWrite << leaderboardNewTop[1] << " " << leaderboardNewTopNickname[1] << "\n";
+	leaderboardFileWrite << leaderboardNewTop[2] << " " << leaderboardNewTopNickname[2];
 	leaderboardFileWrite.close();
 	leaderboardNewTop.clear();
 	leaderboardPlace = 0;
