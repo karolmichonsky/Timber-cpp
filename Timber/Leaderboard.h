@@ -70,7 +70,8 @@ private:
 
     ofstream leaderboardFileWrite;
     ifstream leaderboardFileRead;
-    string leaderboardPoints;
+    string leaderboardLine;
+	string leaderboardPoints;
 
     int leaderboardPlace;
     int leaderboardIntPoints = 0;

@@ -105,8 +105,15 @@ void Leaderboard::saveLeaderboard()
 {
 	checkRecord();
 	leaderboardFileRead.open("leaderboard.txt");
-	while (getline(leaderboardFileRead, leaderboardPoints)) {
+	while (getline(leaderboardFileRead, leaderboardLine)) {
+		leaderboardPoints = "";
+		for (int i = 0; i < leaderboardLine.size(); i++) {
+			if (isdigit(leaderboardLine[i])) {
+				leaderboardPoints += leaderboardLine[i];
+			}
+		}
 		leaderboardIntPoints = stoi(leaderboardPoints);
+		
 		if (leaderboardPlace < 3) {
 			leaderboardNewTop.push_back(leaderboardIntPoints);
 		}
@@ -132,7 +139,13 @@ void Leaderboard::saveLeaderboard()
 void Leaderboard::checkRecord()
 {
 	leaderboardFileRead.open("leaderboard.txt");
-	while (getline(leaderboardFileRead, leaderboardPoints)) {
+	while (getline(leaderboardFileRead, leaderboardLine)) {
+		leaderboardPoints = "";
+		for (int i = 0; i < leaderboardLine.size(); i++) {
+			if (isdigit(leaderboardLine[i])) {
+				leaderboardPoints += leaderboardLine[i];
+			}
+		}
 		leaderboardIntPoints = stoi(leaderboardPoints);
 		if (game->getGamePoints() > leaderboardIntPoints) {
 			leaderboardPlace++;

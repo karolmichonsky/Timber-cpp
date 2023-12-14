@@ -327,7 +327,7 @@ void Game::gameUpdate()
 		if (loseProg > 3) {
 			loseProg = 3;
 		}
-		cout<< 1.f + loseProg;
+		loseTimer -= 1.f + loseProg;
 
 	}
 
