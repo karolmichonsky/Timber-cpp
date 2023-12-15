@@ -274,10 +274,14 @@ void Leaderboard::pollEventsNickname()
 			}
 			if (event.key.code == sf::Keyboard::Enter) {
 				if (nicknamePos < 26) {
-					nicknameWIP += nicknameLetters[nicknamePos].getString();
+					if (nicknameWIP.size() < 12) {
+						nicknameWIP += nicknameLetters[nicknamePos].getString();
+					}
 				}
 				if (nicknamePos == 26) {
-					nicknameWIP.pop_back();
+					if (nicknameWIP != "") {
+						nicknameWIP.pop_back();
+					}
 				}
 				if (nicknamePos == 27) {
 					nicknameGame = nicknameWIP;
@@ -285,6 +289,14 @@ void Leaderboard::pollEventsNickname()
 			}
 			if (event.key.code == sf::Keyboard::Escape) {
 				menu->backToMenu();
+			}
+			if (event.key.code == sf::Keyboard::BackSpace) {
+				if (nicknameWIP != "") {
+					nicknameWIP.pop_back();
+				}
+			}
+			if (event.key.code == sf::Keyboard::Tab) {
+				nicknamePos = 27;
 			}
 		}
 	}
