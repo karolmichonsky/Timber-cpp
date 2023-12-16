@@ -6,6 +6,7 @@ Menu::Menu(sf::RenderWindow* window) {
 	initText(textStyle, "Zmien motyw", 200);
 	initText(textLeaderboard, "Tabela wynikow", 300);
 	initText(textLeave, "Wyjdz z gry", 400);
+	textArray.insert(textArray.end(), { textNewGame,textStyle,textLeaderboard,textLeave});
 }
 
 Menu::~Menu() {
@@ -24,27 +25,10 @@ void Menu::initText(sf::Text& textVar, string textValue, int textHeight)
 
 void Menu::selectedMenu()
 {
-	switch (menuState) {
-	case 0:
-		textLeave.setFillColor(sf::Color::White);
-		textNewGame.setFillColor(sf::Color::Red);
-		textStyle.setFillColor(sf::Color::White);
-		break;
-	case 1:
-		textNewGame.setFillColor(sf::Color::White);
-		textStyle.setFillColor(sf::Color::Red);
-		textLeaderboard.setFillColor(sf::Color::White);
-		break;
-	case 2:
-		textStyle.setFillColor(sf::Color::White);
-		textLeaderboard.setFillColor(sf::Color::Red);
-		textLeave.setFillColor(sf::Color::White);
-		break;
-	case 3:
-		textLeaderboard.setFillColor(sf::Color::White);
-		textLeave.setFillColor(sf::Color::Red);
-		textNewGame.setFillColor(sf::Color::White);
-		break;
+	for (auto& e : textArray) {
+		e.setFillColor(sf::Color::White);
+		textArray[menuState].setFillColor(sf::Color::Red);
+		window->draw(e);
 	}
 }
 
@@ -95,12 +79,8 @@ void Menu::backToMenu()
 
 void Menu::updateMenu()
 {
-	selectedMenu();
 	pollEvents();
 	window->clear(sf::Color(85, 172, 238));
-	window->draw(textNewGame);
-	window->draw(textStyle);
-	window->draw(textLeaderboard);
-	window->draw(textLeave);
+	selectedMenu();
 	window->display();
 }
