@@ -189,7 +189,7 @@ void Leaderboard::pollEventsNickname()
 			this->window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::S) {
+			if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
 				if (nicknamePos < 9) {
 					nicknamePosBefore = nicknamePos;
 					nicknamePos += 10;
@@ -214,7 +214,7 @@ void Leaderboard::pollEventsNickname()
 					nicknamePos = nicknamePosBefore;
 				}
 			}
-			if (event.key.code == sf::Keyboard::D) {
+			if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
 				if (nicknamePos == 9) {
 					nicknamePos = 0;
 				}
@@ -231,7 +231,7 @@ void Leaderboard::pollEventsNickname()
 					nicknamePos++; 
 				}
 			}
-			if (event.key.code == sf::Keyboard::W) {
+			if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
 				if (nicknamePos <= 9) {
 					nicknamePosBefore = nicknamePos;
 					nicknamePos = 27;
@@ -255,7 +255,7 @@ void Leaderboard::pollEventsNickname()
 					nicknamePos = nicknamePosBefore;	
 				}
 			}
-			if (event.key.code == sf::Keyboard::A) {
+			if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
 				if (nicknamePos == 0) {
 					nicknamePos = 9;
 				}

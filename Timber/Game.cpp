@@ -249,7 +249,7 @@ void Game::pollEvents()
 			this->window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::A) {
+			if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
 				if (this->helpLose[1] == 1) {
 					menu->setGameState(99);
 				}
@@ -261,7 +261,7 @@ void Game::pollEvents()
 				}
 				
 			}
-			else if (event.key.code == sf::Keyboard::D) {
+			else if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
 				if (this->helpLose[1] == 2) {
 					menu->setGameState(99);
 				}

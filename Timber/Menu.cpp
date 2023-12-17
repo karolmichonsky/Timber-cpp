@@ -39,13 +39,13 @@ void Menu::pollEvents()
 			this->window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
-			if (event.key.code == sf::Keyboard::S) {
+			if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
 				menuState += 1;
 				if (menuState > 3) {
 					menuState =0;
 				}
 			}
-			if (event.key.code == sf::Keyboard::W) {
+			if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
 				menuState -= 1;
 				if (menuState < 0) {
 					menuState = 3;

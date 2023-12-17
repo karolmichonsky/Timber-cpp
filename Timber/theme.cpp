@@ -23,13 +23,13 @@ void Theme::pollEvents()
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (themeMenuPos == 0) {
-				if (event.key.code == sf::Keyboard::D) {
+				if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::Right) {
 					checkboxPos += 1;
 					if (checkboxPos > 3) {
 						checkboxPos = 0;
 					}
 				}
-				if (event.key.code == sf::Keyboard::A) {
+				if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Left) {
 					checkboxPos -= 1;
 					if (checkboxPos < 0) {
 						checkboxPos = 3;
@@ -40,13 +40,13 @@ void Theme::pollEvents()
 				}
 			}
 			
-			if (event.key.code == sf::Keyboard::S) {
+			if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
 				themeMenuPos += 1;
 				if (themeMenuPos > 1) {
 					themeMenuPos = 0;
 				}
 			}
-			if (event.key.code == sf::Keyboard::W) {
+			if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
 				themeMenuPos -= 1;
 				if (themeMenuPos < 0) {
 					themeMenuPos = 1;
