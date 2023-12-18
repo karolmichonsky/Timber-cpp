@@ -7,7 +7,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
-int main(void) {
+int WinMain(void) {
 	
 	srand(static_cast<unsigned>(time(NULL)));	
 
