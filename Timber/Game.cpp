@@ -204,7 +204,7 @@ void Game::treeHandle()
 void Game::timeHandle()
 {
 	this->gameOn = 1;
-	this->loseTimer += 30.f;
+	this->loseTimer += 25.f;
 	if (this->loseTimer > this->loseTimerMax) {
 		this->loseTimer = this->loseTimerMax;
 	}
@@ -324,8 +324,8 @@ void Game::gameUpdate()
 	}
 	if (gameOn == 1) {
 		float loseProg = points / 60;
-		if (loseProg > 3) {
-			loseProg = 3;
+		if (loseProg > 2) {
+			loseProg = 2;
 		}
 		loseTimer -= 1.f + loseProg;
 
