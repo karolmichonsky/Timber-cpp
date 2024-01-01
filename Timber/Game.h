@@ -11,6 +11,7 @@ using namespace std;
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <vector>
 #include <conio.h>
@@ -55,6 +56,11 @@ private:
 	sf::Texture textureLumberAction;
 	sf::Sprite spriteLumberAction;
 
+	ofstream lastGameStatusWrite;
+	ifstream lastGameStatusRead;
+	string lastGameLine;
+	int lastGamePos;
+
 	void initText();
 	void initVar();
 	void initFloor();
@@ -93,6 +99,7 @@ public:
 	void render();
 	void renderTree();
 	void renderBranches();
+	void checkSave();
 
 	void setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground);
 };

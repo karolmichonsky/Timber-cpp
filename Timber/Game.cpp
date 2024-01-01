@@ -372,6 +372,24 @@ void Game::renderBranches()
 	}
 }
 
+void Game::checkSave()
+{
+	lastGameStatusRead.open("lastGame.txt");
+	while (getline(lastGameStatusRead, lastGameLine)) {
+		if (lastGameLine != "0") {
+			switch (lastGamePos) {
+			case 0:
+				points = stoi(lastGameLine);
+				break;
+			case 1:
+				loseTimer = stof(lastGameLine);
+				break;
+			}
+			lastGameLine += 1;
+		}
+	}
+}
+
 void Game::setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground)
 {
 	branchLeft.setFillColor(styleTree);
