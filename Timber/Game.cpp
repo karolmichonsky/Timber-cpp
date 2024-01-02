@@ -390,6 +390,14 @@ void Game::checkSave()
 	}
 }
 
+void Game::resetSave()
+{
+	lastGameStatusWrite.open("lastGame.txt");
+	lastGameStatusWrite << 0 << endl;
+	lastGameStatusWrite << loseTimer;
+	lastGameStatusWrite.close();
+}
+
 void Game::setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground)
 {
 	branchLeft.setFillColor(styleTree);

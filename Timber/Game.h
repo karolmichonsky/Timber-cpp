@@ -100,6 +100,7 @@ public:
 	void renderTree();
 	void renderBranches();
 	void checkSave();
+	void resetSave();
 
 	void setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground);
 };

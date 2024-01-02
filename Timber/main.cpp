@@ -56,6 +56,7 @@ int WinMain(void) {
 			case 99:
 				leaderboard.saveLeaderboard();
 				game.resetGameStats();
+				game.resetSave();
 				game.resetTree();
 				menu.backToMenu();
 		}
