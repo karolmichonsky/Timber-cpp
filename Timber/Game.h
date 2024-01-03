@@ -33,6 +33,7 @@ private:
 	float loseTimerMax;
 	int treeCounter;
 	int isLeft;
+	int savedGame;
 
 	sf::Font font;
 	sf::Text text;
@@ -59,7 +60,12 @@ private:
 	ofstream lastGameStatusWrite;
 	ifstream lastGameStatusRead;
 	string lastGameLine;
-	int lastGamePos;
+	int lastGamePos = 0;
+	sf::Text savedGameText1;
+	sf::Text savedGameText2;
+	sf::Text savedGameNewGame;
+	sf::Text savedGameContinue;
+	int savedGamePos = 0;
 
 	void initText();
 	void initVar();
@@ -71,6 +77,9 @@ private:
 	void initTimer();
 	void initPauseResume();
 	void initPauseEscape();
+	void initSavedGame();
+	void initSavedGamePos();
+
 public:
 	//Konstruktor i destruktor
 	Game(sf::RenderWindow* window, Menu* menu);
@@ -100,7 +109,12 @@ public:
 	void renderTree();
 	void renderBranches();
 	void checkSave();
+	void setSave();
 	void resetSave();
+	int getSavedGame();
+	void setSavedGame();
+	void manageSavedGame();
+	void pollEventsSavedGame();
 
 	void setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground);
 };

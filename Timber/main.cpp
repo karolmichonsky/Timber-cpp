@@ -21,6 +21,7 @@ int WinMain(void) {
 	Leaderboard leaderboard(&window, &game, &menu);
 	Theme theme(&window, &game, &menu);
 	sf::Clock clock;
+	game.setSavedGame();
 
 	while (game.running()) {
 		switch(menu.accessGameState()){
@@ -30,6 +31,9 @@ int WinMain(void) {
 			case 0:
 				if (leaderboard.getNicknameGame()==""){
 					leaderboard.updateNickname();
+				}
+				else if (leaderboard.getNicknameGame() != "" && game.getSavedGame() == 1) {
+					game.manageSavedGame();
 				}
 				else {
 					if (game.getLoseTimer() < 0.0f) {

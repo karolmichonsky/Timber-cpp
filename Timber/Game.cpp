@@ -86,6 +86,35 @@ void Game::initPauseEscape()
 	pauseEscape.setOutlineThickness(2);
 }
 
+void Game::initSavedGame()
+{
+	font.loadFromFile("GAMERIA.ttf");
+	savedGameText1.setFont(font);
+	savedGameText1.setString("Ostatnia gra nie zostala ukonczona");
+	savedGameText1.setPosition(400 - savedGameText1.getGlobalBounds().getSize().x / 2, 100);
+	savedGameText2.setFont(font);
+	savedGameText2.setString("Czy chcesz kontynuowac?");
+	savedGameText2.setPosition(400 - savedGameText2.getGlobalBounds().getSize().x / 2, 150);
+	savedGameContinue.setFont(font);
+	savedGameContinue.setString("Kontynuuj");
+	savedGameContinue.setPosition(400 - savedGameContinue.getGlobalBounds().getSize().x / 2, 300);
+	savedGameNewGame.setFont(font);
+	savedGameNewGame.setString("Nowa gra");
+	savedGameNewGame.setPosition(400 - savedGameNewGame.getGlobalBounds().getSize().x / 2, 400);
+}
+
+void Game::initSavedGamePos()
+{
+	if (savedGamePos == 0) {
+		savedGameContinue.setFillColor(sf::Color::Red);
+		savedGameNewGame.setFillColor(sf::Color::White);
+	}
+	else {
+		savedGameContinue.setFillColor(sf::Color::White);
+		savedGameNewGame.setFillColor(sf::Color::Red);
+	}
+}
+
 Game::Game(sf::RenderWindow* window, Menu* menu) : window(window), menu(menu) {
 	this->window = window;
 	this->initVar();
@@ -99,6 +128,7 @@ Game::Game(sf::RenderWindow* window, Menu* menu) : window(window), menu(menu) {
 	this->initBranchesRight();
 	initPauseEscape();
 	initPauseResume();
+	initSavedGame();
 }
 
 Game::~Game() {
@@ -246,6 +276,7 @@ void Game::pollEvents()
 {
 	while (this->window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
+			setSave();
 			this->window->close();
 		}
 		if (this->event.type == sf::Event::KeyPressed) {
@@ -258,6 +289,7 @@ void Game::pollEvents()
 					this->treeHandle();
 					isChopping = 1;
 					isLeft = 1;
+					setSave();
 				}
 				
 			}
@@ -270,13 +302,16 @@ void Game::pollEvents()
 					this->updatePoints();
 					isChopping = 1;
 					isLeft = 0;
+					setSave();
 				}
 				
 			}
 			else if (event.key.code == sf::Keyboard::Escape) {	
 				if (gameOn == 0)
 				{
-					menu->setGameState(99);
+					setSave();
+					savedGame = 1;
+					menu->setGameState(-1);
 				}
 				gameOn = 0;
 			}
@@ -375,19 +410,19 @@ void Game::renderBranches()
 void Game::checkSave()
 {
 	lastGameStatusRead.open("lastGame.txt");
-	while (getline(lastGameStatusRead, lastGameLine)) {
-		if (lastGameLine != "0") {
-			switch (lastGamePos) {
-			case 0:
-				points = stoi(lastGameLine);
-				break;
-			case 1:
-				loseTimer = stof(lastGameLine);
-				break;
-			}
-			lastGameLine += 1;
-		}
-	}
+	getline(lastGameStatusRead, lastGameLine);
+	points = stoi(lastGameLine);
+	getline(lastGameStatusRead, lastGameLine);
+	loseTimer = stof(lastGameLine);
+	lastGameStatusRead.close();
+}
+
+void Game::setSave()
+{
+	lastGameStatusWrite.open("lastGame.txt");
+	lastGameStatusWrite << points << endl;
+	lastGameStatusWrite << loseTimer;
+	lastGameStatusWrite.close();
 }
 
 void Game::resetSave()
@@ -396,6 +431,74 @@ void Game::resetSave()
 	lastGameStatusWrite << 0 << endl;
 	lastGameStatusWrite << loseTimer;
 	lastGameStatusWrite.close();
+}
+
+int Game::getSavedGame()
+{
+	return savedGame;
+}
+
+void Game::setSavedGame()
+{
+	lastGameStatusRead.open("lastGame.txt");
+	getline(lastGameStatusRead, lastGameLine);
+	if (lastGameLine != "0") {
+		savedGame = 1;
+	}
+	else {
+		savedGame = 0;
+	}
+	lastGameStatusRead.close();
+}
+
+void Game::manageSavedGame()
+{
+	pollEventsSavedGame();
+	initSavedGamePos();
+	window->clear(sf::Color(85, 172, 238));
+	window->draw(savedGameText1);
+	window->draw(savedGameText2);
+	window->draw(savedGameContinue);
+	window->draw(savedGameNewGame);
+	window->display();
+}
+
+void Game::pollEventsSavedGame()
+{
+	while (this->window->pollEvent(this->event)) {
+		if (this->event.type == sf::Event::Closed) {
+			this->window->close();
+		}
+		if (this->event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) {
+				if (savedGamePos == 0) {
+					savedGamePos = 1;
+				}
+				else {
+					savedGamePos = 0;
+				}
+			}
+			if (event.key.code == sf::Keyboard::S || event.key.code == sf::Keyboard::Down) {
+				if (savedGamePos == 0) {
+					savedGamePos = 1;
+				}
+				else {
+					savedGamePos = 0;
+				}
+			}
+			if (event.key.code == sf::Keyboard::Enter) {
+				if (savedGamePos == 0) {
+					checkSave();
+					initText();
+					window->draw(text);
+				}
+				else {
+					resetGameStats();
+				}
+				savedGame = 0;
+			}
+		}
+	}
 }
 
 void Game::setStyle(sf::Color styleTree, sf::Color styleFloor, sf::Color styleBackground)
