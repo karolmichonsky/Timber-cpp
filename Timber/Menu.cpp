@@ -2,7 +2,7 @@
 
 Menu::Menu(sf::RenderWindow* window) {
 	this->window = window;
-	initText(textNewGame, "Nowa gra", 100);
+	initText(textNewGame, "Graj", 100);
 	initText(textStyle, "Zmien motyw", 200);
 	initText(textLeaderboard, "Tabela wynikow", 300);
 	initText(textLeave, "Wyjdz z gry", 400);

@@ -93,7 +93,7 @@ void Game::initSavedGame()
 	savedGameText1.setString("Ostatnia gra nie zostala ukonczona");
 	savedGameText1.setPosition(400 - savedGameText1.getGlobalBounds().getSize().x / 2, 100);
 	savedGameText2.setFont(font);
-	savedGameText2.setString("Czy chcesz kontynuowac?");
+	savedGameText2.setString("Czy chcesz kontynuowac");
 	savedGameText2.setPosition(400 - savedGameText2.getGlobalBounds().getSize().x / 2, 150);
 	savedGameContinue.setFont(font);
 	savedGameContinue.setString("Kontynuuj");
